@@ -6,8 +6,8 @@
 henriqueandras@gmail.com
 
 ### Emmanuel
-emmanuel.omariosei@ucalgary.ca
-fifiEmmanuel@gmail.com
+emmanuel.omariosei@ucalgary.ca 
+| fifiEmmanuel@gmail.com
 
 ### Jeff
 jeff.roszell@gmail.com
