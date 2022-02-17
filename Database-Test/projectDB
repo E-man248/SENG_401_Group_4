@@ -1,0 +1,139 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.2
+-- Dumped by pg_dump version 14.2
+
+-- Started on 2022-02-16 23:41:43 MST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 210 (class 1259 OID 16403)
+-- Name: Channels; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Channels" (
+    "channelID" integer NOT NULL,
+    "channelName" "char"[],
+    "timeCreated" integer,
+    "dateCreated" integer
+);
+
+
+ALTER TABLE public."Channels" OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1259 OID 16410)
+-- Name: Posts; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Posts" (
+    "postID" integer NOT NULL,
+    "timeCreated" integer,
+    "dateCreated" integer,
+    tags character varying[],
+    content "char"[]
+);
+
+
+ALTER TABLE public."Posts" OWNER TO postgres;
+
+--
+-- TOC entry 209 (class 1259 OID 16396)
+-- Name: Users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Users" (
+    "userID" integer NOT NULL,
+    username "char"[],
+    "firstName" "char"[],
+    "lastName" "char"[],
+    password "char"[],
+    major "char"[],
+    tags character varying(100)[],
+    school "char"[],
+    email "char"[],
+    year integer
+);
+
+
+ALTER TABLE public."Users" OWNER TO postgres;
+
+--
+-- TOC entry 3583 (class 0 OID 16403)
+-- Dependencies: 210
+-- Data for Name: Channels; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Channels" ("channelID", "channelName", "timeCreated", "dateCreated") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3584 (class 0 OID 16410)
+-- Dependencies: 211
+-- Data for Name: Posts; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Posts" ("postID", "timeCreated", "dateCreated", tags, content) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3582 (class 0 OID 16396)
+-- Dependencies: 209
+-- Data for Name: Users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Users" ("userID", username, "firstName", "lastName", password, major, tags, school, email, year) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3440 (class 2606 OID 16409)
+-- Name: Channels Channels_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Channels"
+    ADD CONSTRAINT "Channels_pkey" PRIMARY KEY ("channelID");
+
+
+--
+-- TOC entry 3442 (class 2606 OID 16416)
+-- Name: Posts Posts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Posts"
+    ADD CONSTRAINT "Posts_pkey" PRIMARY KEY ("postID");
+
+
+--
+-- TOC entry 3438 (class 2606 OID 16402)
+-- Name: Users Users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Users"
+    ADD CONSTRAINT "Users_pkey" PRIMARY KEY ("userID");
+
+
+-- Completed on 2022-02-16 23:41:43 MST
+
+--
+-- PostgreSQL database dump complete
+--
+
