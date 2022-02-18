@@ -80,6 +80,16 @@ nav a {
   color: #ffffff;
 }
 
+nav b {
+  font-family: Arial;
+  font-size: 4.5rem;
+  display: block;
+  color: #ffffff;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 
 /* || main layout */
 
@@ -114,4 +124,42 @@ footer {
   width:5px;
   height:auto;
   display:inline-block;
+}
+
+/* Buttons */
+
+.button {
+  background-color: #585858;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 36px;
+  font-family: Arial;
+  text-align: center;
+  margin: 30px;
+  margin-top: 100px;
+  display: inline-block;
+  justify-content: center;
+}
+
+.small-button{
+  width: 50px;
+  height: 20px;
+}
+
+.normal-button{
+  width: 80px;
+  height: 30px;
+}
+
+.large-button{
+  width: 140px;
+  height: 50px;
+}
+
+.container{
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  height: 300px;
+  text-align: center;
 }
