@@ -1,0 +1,1 @@
+Global templates goes here.
