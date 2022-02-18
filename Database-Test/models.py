@@ -3,7 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 class UserTag(models.Model):
-    tagName
+    tagName = models.CharField(max_length=32)
 
 class User(models.Model):
     name = models.CharField(max_length=32)
@@ -21,11 +21,10 @@ class Channel(models.Model):
     name = models.CharField(max_length=255)
     date_posted = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE())
-    
 
 
 class PostTags(models.Model):
-    name = models.CharField(max_length=32)
+    tagName = models.CharField(max_length=32)
 
 
 class Post(models.Model):
