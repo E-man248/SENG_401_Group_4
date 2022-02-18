@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'auth',
     'channels',
     'classes',
-    'posts',
 ]
 
 MIDDLEWARE = [
