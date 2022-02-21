@@ -30,8 +30,8 @@ class Post(models.Model):
     posted_in = models.ForeignKey(Channel, on_delete=models.CASCADE)
     tag = models.ForeignKey(PostTag, on_delete=models.CASCADE)
 
-class Meta(models.Model):
-    unique_together = ('title', 'created_by', 'posted_in')
+    class Meta:
+        unique_together = ('title', 'created_by', 'posted_in')
 
     def __str__(self):
         return str(self.title)

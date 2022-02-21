@@ -23,4 +23,4 @@ class User(models.Model):
     date_joined = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return str(self.name)
+        return str(self.userName)
