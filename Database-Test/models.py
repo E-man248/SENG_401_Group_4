@@ -4,6 +4,7 @@ from django.utils import timezone
 class UserTag(models.Model):
     tagName = models.CharField(max_length=32)
 
+
 class User(models.Model):
     name = models.CharField(max_length=32)
     email = models.CharField(max_length=100)
@@ -11,7 +12,7 @@ class User(models.Model):
     userName = models.CharField(max_length=32, unique=True)
     password = models.CharField(max_length=16)
     major = models.CharField(max_length=32)
-    tag = models.ForeignKey(UserTag, on_delete=models.CASCADE)
+    tag = models.ManyToManyField(UserTag)
     school = models.CharField(max_length=255)
     date_posted = models.DateTimeField(default=timezone.now)
 
@@ -33,6 +34,7 @@ class Post(models.Model):
     posted_by = models.ForeignKey(User, on_delete=models.CASCADE)
     posted_in = models.ForeignKey(Channel, on_delete=models.CASCADE)
     tag = models.ForeignKey(PostTag, on_delete=models.CASCADE)
+
 
 class Class(models.Model):
     name = models.CharField(max_length=255)
