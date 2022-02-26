@@ -10,12 +10,12 @@
     <!-- Header -->
     <nav>
         <h1>
-            <a href="#">Acafeed</a>
+            <a href="home.html">Acafeed</a>
         </h1>
         <ul>
-            <li><a href="#">My Classes</a></li>
+            <li><a href="MyClasses.html">My Classes</a></li>
             <li><a href="#">My Account</a></li>
-            <li><a href="#">Logout</a></li>
+            <li><a href="home.html">Logout</a></li>
         </ul>
     </nav>
 
@@ -38,10 +38,26 @@
 
 
     </main>
+    <script>
+        function Submitconfirm() {
+            if (window.confirm('Are you ready to Post?')) {
+                window.location.href = 'MyChannels.html';
+            }
+        }
+        function Cancelconfirm() {
+            if (window.confirm('Are you sure you want to cancel?')) {
+                window.location.href = 'MyChannels.html';
+            }
+        }
+    </script>
+
     <div style="padding-top: 5%; padding-bottom: 2%; text-align: center">
-        <button type="button">Submit</button>
+        <a href="MyChannels.html">
+            <button type="button" onclick="Submitconfirm(); return false;">Post
+            </button>
+        </a>
         <div class="divider"></div>
-        <button type="button">Cancel</button>
+        <button type="button" onclick="Cancelconfirm(); return false;">Cancel</button>
 
     </div>
 
