@@ -1,20 +1,29 @@
 from django.db import models
 from django.utils import timezone
 from users.models import User
-from courses.models import Course
+from eventsourcing.application import Application
+from eventsourcing.domain import Aggregate, event
 
 
 # Create your models here.
 
 
-class Channel(models.Model):
+class Channel(models.Model, Application):
     name = models.CharField(max_length=255, unique=True)
     date_posted = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return str(self.name)
+
+    def registerPost(self, title, content, user, tag):
+        post = Post(title, content, user, self, tag)
+        self.save(post)
+        return post.id
+
+    def get_post(self, post_id):
+        post = self.repository.get(post_id)
+        return {'title': post.title, 'content': post.content}
 
 
 class PostTag(models.Model):
@@ -24,7 +33,15 @@ class PostTag(models.Model):
         return str(self.tagName)
 
 
-class Post(models.Model):
+class Post(models.Model, Aggregate):
+    @event('Posted')
+    def __init__(self, title, content, user, channel, tag):
+        self.title = title
+        self.content = content
+        self.created_by = User(user)
+        self.posted_in = channel
+        self.tag = tag
+
     title = models.CharField(max_length=255)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
