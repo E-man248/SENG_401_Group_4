@@ -1,3 +1,9 @@
 asgiref==3.5.0
 Django==4.0.2
 sqlparse==0.4.2
+
+django-email-users~=1.1.0
+eventsourcing~=9.2.2
+pip~=22.0.3
+wheel~=0.37.1
+setuptools~=60.9.3
