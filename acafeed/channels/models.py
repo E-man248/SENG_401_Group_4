@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from users.models import User
+from courses.models import Course
 
 
 # Create your models here.
@@ -10,6 +11,7 @@ class Channel(models.Model):
     name = models.CharField(max_length=255, unique=True)
     date_posted = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, default='NoCourse')
 
     def __str__(self):
         return str(self.name)

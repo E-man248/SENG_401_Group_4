@@ -4,8 +4,8 @@ from django.db import models
 # Create your models here.
 
 class Course(models.Model):
-    name = models.CharField(max_length=32)
-    courseCode = models.CharField(max_length=4)
+    name = models.CharField(max_length=32, unique=True)
+    courseCode = models.CharField(max_length=8, unique=True)
     sectionNumber = models.IntegerField()
     faculty = models.CharField(max_length=32)
     professor = models.CharField(max_length=32)
