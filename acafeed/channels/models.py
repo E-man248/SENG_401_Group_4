@@ -30,7 +30,7 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     posted_in = models.ForeignKey(Channel, on_delete=models.CASCADE)
-    tag = models.ForeignKey(PostTag, on_delete=models.CASCADE)
+    tags = models.ManyToManyField(PostTag)
 
     class Meta:
         unique_together = ('title', 'created_by', 'posted_in')
