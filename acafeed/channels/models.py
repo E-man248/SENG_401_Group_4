@@ -11,7 +11,7 @@ class Channel(models.Model):
     name = models.CharField(max_length=255, unique=True)
     date_posted = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, default='NoCourse')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return str(self.name)
