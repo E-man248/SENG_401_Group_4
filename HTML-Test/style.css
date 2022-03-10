@@ -115,17 +115,22 @@ footer {
   margin-top: 10px;
 }
 
-
 .contentPost{
   resize:none;
   background: #e5e5e5;
 }
+
 .divider{
   width:5px;
   height:auto;
   display:inline-block;
 }
 
+.center{
+margin:0;
+position:relative;
+left:50%;
+}
 /* Buttons */
 
 .button {
@@ -162,4 +167,22 @@ footer {
   position: relative;
   height: 300px;
   text-align: center;
+}
+
+/* Text box alignment */
+label{
+display:inline-block;
+width:200px;
+margin-right:30px;
+text-align:right;
+}
+
+input{
+
+}
+
+fieldset{
+border:none;
+width:500px;
+margin:0px auto;
 }
