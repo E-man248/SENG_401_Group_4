@@ -1,0 +1,39 @@
+{% extends 'base_layout.html' %}   
+
+{% block content %}
+
+  <!-- Header -->
+  <nav>
+    <h1>
+      <a href="home-page.html">Acafeed</a>
+    </h1>
+  </nav>
+
+  <!-- Title -->
+  <h2>Sign Up</h2>
+  <main>
+
+    <!-- Main Content -->
+    <article>
+      <fieldset>
+        <form action="" method="post">
+          <p><label for="username">Username:</label>
+            <input type="text" name="username" id="username" /></p>
+          <p><label for="password">Password:</label>
+            <input type="password" name="password" id="password" /></p>
+          <p><label for="fname">First Name:</label>
+            <input type="text" name="fname" id="fname" /></p>
+          <p><label for="lname">Last Name:</label>
+            <input type="text" name="lname" id="lname" /></p>
+          <p><label for="email">Email:</label>
+            <input type="text" name="email" id="email" /></p>
+          <p><label for="school">School: (dropdown)</label>
+          <p><label for="major">Major: (dropdown)</label>
+          <p><center><input type="submit" value="Sign Up!"></center></p>
+        </form>
+      </fieldset>
+    </article>
+
+  </main>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base_layout.html' %}   
+
+{% block content %}
+
+  <title>Acafeed</title>
+
+  <nav>
+    <b href="home-page.html">Acafeed</b>
+    <!--logo placement <a href="home-page.html">{% load static %} <img src="{% static "static/img/acafeed-logo.png" %}" alt="logo"/></a>-->
+  </nav>
+
+  <div class="container">
+    <a href="{% url 'users:login' %}">
+      <div class="button large-button">Log In</div>
+    </a>
+    <a href="{% url 'users:signup' %}">
+      <div class="button large-button">Sign Up</div>
+    </a>
+  </div>
+
+  {% endblock %}
