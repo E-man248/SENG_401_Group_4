@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Channel
+from .models import Channel, PostApp, ChannelApp
 from .models import Post
 from .models import PostTag
 
@@ -8,4 +8,6 @@ from .models import PostTag
 admin.site.register(Channel)
 admin.site.register(Post)
 admin.site.register(PostTag)
+admin.site.register(PostApp)
+admin.site.register(ChannelApp)
 # Register your models here.
