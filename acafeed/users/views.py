@@ -44,3 +44,7 @@ def users_logout(request):
     if 'user_id' in request.session:
         del request.session['user_id']  # delete user session
         return redirect('users:login')
+
+def users_myaccount(request):
+    if 'user_id' in request.session:
+        return render(request, 'users/user-profile.html')
