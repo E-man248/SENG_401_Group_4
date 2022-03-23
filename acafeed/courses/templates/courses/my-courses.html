@@ -19,12 +19,15 @@
 
   <main>
     <!-- Main Content -->
+    
     <article>
+      {% for course in user.courses.all %}
       <ul>
-        <li><a href="course-home.html">SENG 401</a></li>
-        <li><a href="#">CPSC 441</a></li>
+        <li><a href="#">{{ course }}</a></li>
       </ul>
+      {% endfor %}
     </article>
+    
 
   </main>
 

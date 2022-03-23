@@ -5,12 +5,6 @@ from courses.models import Course
 
 # Create your models here.
 
-class UserTag(models.Model):
-    tagName = models.CharField(max_length=32)
-
-    def __str__(self):
-        return str(self.tagName)
-
 
 class User(models.Model):
     name = models.CharField(max_length=32)
@@ -19,10 +13,9 @@ class User(models.Model):
     userName = models.CharField(max_length=32, unique=True)
     password = models.CharField(max_length=16)
     major = models.CharField(max_length=32)
-    tag = models.ManyToManyField(UserTag)
     school = models.CharField(max_length=255)
     date_joined = models.DateTimeField(default=timezone.now)
-    courses = models.ManyToManyField(Course)
+    courses = models.ManyToManyField(Course, null=True)
     blocked = models.BooleanField(default=False)
 
     def __str__(self):
