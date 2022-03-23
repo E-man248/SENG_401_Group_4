@@ -16,13 +16,15 @@
       <!-- Main Content -->
 	  <article>
           <fieldset>
-              <form action = "" method = "post">
-              <p><label for="username">Username:</label>
-                  <input type = "text" name = "username" id = "username"/></p>
-              <p><label for="password">Password:</label>
-                  <input type = "text" name = "password" id = "password"/></p>
-              <p><center><input type = "submit" value = "Log In"></center></p>
-              </form>
+            <form action="{% url 'users:login' %}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if request.GET.next %}
+                    <input type="hidden" name="next" value="{{ request.GET.next }}" />
+                {% endif %}
+                <input type="submit" value="Login" />
+            </form>
+            <p>Not got an account? <a href="{% url 'users:signup' %}">Sign Up</a></p>
           </fieldset>
 	  </article>
 

@@ -10,12 +10,12 @@
     <ul>
       <li><a href="my-courses.html">My Courses</a></li>
       <li><a href="#">My Account</a></li>
-      <li><a href="home-page.html">Logout</a></li>
+      <li><a href="{% url 'users:logout' %}">Logout</a></li>
     </ul>
   </nav>
 
   <!-- Title -->
-  <h2>My Courses</h2>
+  <h2>Hello {{ user.userName }}</h2>
 
   <main>
     <!-- Main Content -->
