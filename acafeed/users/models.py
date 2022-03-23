@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from courses.models import Course
 
 
 # Create your models here.
@@ -21,6 +22,8 @@ class User(models.Model):
     tag = models.ManyToManyField(UserTag)
     school = models.CharField(max_length=255)
     date_joined = models.DateTimeField(default=timezone.now)
+    courses = models.ManyToManyField(Course)
+    blocked = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.userName)
