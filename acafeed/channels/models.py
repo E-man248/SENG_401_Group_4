@@ -16,6 +16,7 @@ class PostTag(models.Model):
 class Channel(models.Model):
     name = models.CharField(max_length=255, unique=True)
     date_posted = models.DateTimeField(default=timezone.now)
+<<<<<<< Updated upstream
     subscribers = models.ManyToManyField(User)
 
     def subscribe(self, user):
@@ -25,6 +26,8 @@ class Channel(models.Model):
         u = User.objects.get(userName = user)
         self.topic_set.remove(u)
 
+=======
+>>>>>>> Stashed changes
 
     def __str__(self):
         return str(self.name)
