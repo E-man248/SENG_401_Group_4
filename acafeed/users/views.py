@@ -4,6 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
 
+
 # Create your views here.
 
 
@@ -45,10 +46,19 @@ def users_logout(request):
         del request.session['user_id']  # delete user session
         return redirect('users:login')
 
+
 def users_myaccount(request):
     if 'user_id' in request.session:
-        return render(request, 'users/user-profile.html')
+        user = get_user(request)
+        return render(request, 'users/user-profile.html', {'user': user})
+
 
 def users_adminmenu(request):
     if 'user_id' in request.session:
-         return render(request, 'users/admin-menu.html')
+        user = get_user(request)
+        return render(request, 'users/admin-menu.html', {'user': user})
+
+
+def get_user(request):
+    if 'user_id' in request.session:
+        return User.objects.get(id=request.session['user_id'])

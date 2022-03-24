@@ -5,7 +5,6 @@ from courses.models import Course
 
 # Create your models here.
 
-
 class User(models.Model):
     name = models.CharField(max_length=32)
     email = models.CharField(max_length=100, unique=True)
@@ -17,6 +16,7 @@ class User(models.Model):
     date_joined = models.DateTimeField(default=timezone.now)
     courses = models.ManyToManyField(Course, null=True)
     blocked = models.BooleanField(default=False)
+    isAdmin = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.userName)

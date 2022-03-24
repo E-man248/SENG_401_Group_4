@@ -5,19 +5,26 @@ from users.models import User
 
 
 def courses_admincreatecourse(request):
-    return render(request, 'courses/admin-create-course.html')
+    if 'user_id' in request.session:
+        user = get_user(request)
+        return render(request, 'courses/admin-create-course.html', {'user': user})
 
 
 def courses_coursehome(request):
-    return render(request, 'courses/course-home.html')
+    if 'user_id' in request.session:
+        user = get_user(request)
+        return render(request, 'courses/course-home.html', {'user': user})
 
 
 def courses_findcourses(request):
-    return render(request, 'courses/find-courses.html')
+    if 'user_id' in request.session:
+        user = get_user(request)
+        return render(request, 'courses/find-courses.html', {'user': user})
 
 
 def get_user(request):
-    return User.objects.get(id=request.session['user_id'])
+    if 'user_id' in request.session:
+        return User.objects.get(id=request.session['user_id'])
 
 
 def courses_mycourses(request):
