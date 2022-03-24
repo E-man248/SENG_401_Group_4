@@ -1,7 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from courses.models import Course
-
+from courses.models import *
 
 # Create your models here.
 
@@ -14,9 +13,18 @@ class User(models.Model):
     major = models.CharField(max_length=32)
     school = models.CharField(max_length=255)
     date_joined = models.DateTimeField(default=timezone.now)
-    courses = models.ManyToManyField(Course, null=True)
+    courses = models.ManyToManyField(Course)
     blocked = models.BooleanField(default=False)
     isAdmin = models.BooleanField(default=False)
 
+    def getAllMessages(self):
+        return self.message_set.all()
+
+    def getUnreadMesages(self):
+        ms = self.message_set.get(readFlag = False)
+        for m in ms:
+            m.readFlag = True
+        return ms    
+        
     def __str__(self):
         return str(self.userName)
