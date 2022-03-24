@@ -15,6 +15,7 @@ class User(models.Model):
     date_joined = models.DateTimeField(default=timezone.now)
     courses = models.ManyToManyField(Course)
     blocked = models.BooleanField(default=False)
+    isAdmin = models.BooleanField(default=False)
 
     def getAllMessages(self):
         return self.message_set.all()
