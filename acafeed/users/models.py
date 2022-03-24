@@ -1,10 +1,10 @@
 from django.db import models
 from django.utils import timezone
-from courses.models import Course
+from channels.models import *
+from courses.models import *
 
 
 # Create your models here.
-
 
 class User(models.Model):
     name = models.CharField(max_length=32)
@@ -18,5 +18,18 @@ class User(models.Model):
     courses = models.ManyToManyField(Course, null=True)
     blocked = models.BooleanField(default=False)
 
+    def unsubscribe(self, channel):
+        c = Channel.objects.get(channelName = channel)
+        self.topic_set.remove(c)
+
+    def getAllMessages(self):
+        return self.message_set.all()
+
+    def getUnreadMesages(self):
+        ms = self.message_set.get(readFlag = False)
+        for m in ms:
+            m.readFlag = True
+        return ms    
+        
     def __str__(self):
         return str(self.userName)
