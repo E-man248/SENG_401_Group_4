@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils import timezone
-from channels.models import *
 from courses.models import *
-
 
 # Create your models here.
 
@@ -15,12 +13,8 @@ class User(models.Model):
     major = models.CharField(max_length=32)
     school = models.CharField(max_length=255)
     date_joined = models.DateTimeField(default=timezone.now)
-    courses = models.ManyToManyField(Course, null=True)
+    courses = models.ManyToManyField(Course)
     blocked = models.BooleanField(default=False)
-
-    def unsubscribe(self, channel):
-        c = Channel.objects.get(channelName = channel)
-        self.topic_set.remove(c)
 
     def getAllMessages(self):
         return self.message_set.all()
