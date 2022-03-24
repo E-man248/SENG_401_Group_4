@@ -22,9 +22,9 @@
   </main>
 
   <div style="padding-top: 2%; padding-bottom: 2%; text-align: center">
-    <button type="button">Find Courses</button>
-
-
+    <a href="{% url 'courses:findcourses' %}">
+      <button type="button">Find Courses</button>
+    </a>
   </div>
 
 {% endblock %}
