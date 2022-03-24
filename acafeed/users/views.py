@@ -48,3 +48,7 @@ def users_logout(request):
 def users_myaccount(request):
     if 'user_id' in request.session:
         return render(request, 'users/user-profile.html')
+
+def users_adminmenu(request):
+    if 'user_id' in request.session:
+         return render(request, 'users/admin-menu.html')

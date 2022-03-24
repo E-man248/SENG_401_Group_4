@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
+{% extends 'base_layout.html' %}
 
-<head>
-  <meta charset="utf-8">
+{% block content %}
 
-  <title>Acafeed</title>
-  <link rel="stylesheet" href="style.css">
 
   <!-- Header -->
     {% include 'navbar.html' %}
@@ -17,9 +13,9 @@
     <!-- Main Content -->
     <article>
       <fieldset>
-        <p><center><button onclick="window.location.href='admin-create-course.html';">Create Course</button>
+        <h3><center><a href="{% url 'courses:admincreatecourse' %}"<button>Create Course</button></a>
           <span style="padding-left:20px"></span>
-          <button onclick="window.location.href='admin-create-channel.html';">Create Channel</button></center></p>
+          <a href="{% url 'channels:admincreatechannel' %}"<button>Create Channel</button></center></h3>
           <br>
 
         <form action="" method="post">
@@ -38,11 +34,7 @@
 
   </main>
 
-  <!-- Footer -->
-  <footer>
-    <p>© Copyright 2022 Acafeed :)</p>
-  </footer>
 
-  </body>
 
-</html>
+
+{% endblock %}
