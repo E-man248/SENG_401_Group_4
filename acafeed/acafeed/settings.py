@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-   # 'eventsourcing_django.apps.EventsourcingConfig',
     'users',
     'channels',
     'courses',
