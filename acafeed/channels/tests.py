@@ -79,5 +79,5 @@ class MessageTestCase(TestCase):
 
         messages = u.message_set.all()
 
-        self.assertEqual(messages.first.messageText, "New post in channel: " + c.name)
+        self.assertEqual(messages[0].messageText, "New post in channel: " + c.name)
 
