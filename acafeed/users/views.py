@@ -18,6 +18,9 @@ def users_login(request):
         password = request.POST['password']
         if User.objects.filter(userName=userName, password=password).exists():
             user = User.objects.get(userName=userName)
+            check_blocked = user.blocked
+            if check_blocked == True:
+                return render(request, 'users/login.html', {'form': form})
             # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
             request.session['user_id'] = user.id
             return redirect('courses:mycourses')
@@ -45,10 +48,12 @@ def users_logout(request):
         del request.session['user_id']  # delete user session
         return redirect('users:login')
 
+
 def users_myaccount(request):
     if 'user_id' in request.session:
         return render(request, 'users/user-profile.html')
 
+
 def users_adminmenu(request):
     if 'user_id' in request.session:
-         return render(request, 'users/admin-menu.html')
+        return render(request, 'users/admin-menu.html')
