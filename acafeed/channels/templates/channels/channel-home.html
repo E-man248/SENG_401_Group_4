@@ -13,11 +13,11 @@
     <!-- Main Content -->
     <article>
       <h3>Posts</h3>
-      <ul>
-        <li><a href="#">W2021 Exam Q1 Help</a></li>
-        <li><a href="#">Are slides on the test?</a></li>
-        <li><a href="#">Should I read the textbook?</a></li>
-      </ul>
+      {% for post in channel.posts.all %}
+          <ul>
+         <li><a href="{% url 'channels:posthome' %}">{{ post }}</a></li>
+         </ul>
+      {% endfor %}
     </article>
 
   </main>
