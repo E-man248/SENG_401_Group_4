@@ -10,18 +10,11 @@
 <!-- Top box with all drop downs  -->
 <div>
     <div>
-        <h2> Major</h2>
-        <h3> {{myFilter.form.faculty.label_tag}} {{myFilter.form.faculty}}</h3>
-
-    </div>
-    <div>
-        <h2> Year</h2>
-        <h3> {{myFilter.form.year.label_tag}}
-            {{myFilter.form.year}}</h3>
-
-    </div>
-    <div>
         <form id="form">
+            {{myFilter.form.faculty.label_tag}}
+            {{myFilter.form.faculty}}
+            {{myFilter.form.year.label_tag}}
+            {{myFilter.form.year}}
             {{myFilter.form.search}}
             <button type='submit'>Search</button>
 
@@ -41,11 +34,8 @@
     <div>
         <h4>
             <input type="checkbox" id="seng471" name="seng471" checked>
-            <label for="seng471">Software Requirements Engineering [SENG 471]</label>
+            <label for="seng471">{{ result }}</label>
             <br>
-            </br>
-            <input type="checkbox" id="seng438" name="seng438">
-            <label for="seng438">Software Testing, Reliability, and Quality [SENG 438] </label>
         </h4>
 
     </div>

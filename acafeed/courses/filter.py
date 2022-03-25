@@ -8,6 +8,7 @@ from django.db.models import Q
 from .models import *
 
 class FindCourseFilter(PropertyFilterSet):
+
     search = CharFilter(method='filter_by_all_name_fields',
                         widget=TextInput(attrs={'placeholder': 'Search...'}))
     YEAR = (

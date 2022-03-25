@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from users.models import User
 from .filter import FindCourseFilter
+from .models import Course
 
 # Create your views here.
 
@@ -14,8 +15,10 @@ def courses_coursehome(request):
 
 
 def courses_findcourses(request):
-    myFilter = FindCourseFilter(request.GET)
-    return render(request, 'courses/find-courses.html', {'myFilter': myFilter})
+    courses = Course.objects.all()
+    myFilter = FindCourseFilter(request.GET, queryset=courses)
+    result = myFilter.qs
+    return render(request, 'courses/find-courses.html', {'myFilter': myFilter, 'result': result})
 
 
 def get_user(request):
