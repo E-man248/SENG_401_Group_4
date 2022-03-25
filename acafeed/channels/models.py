@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from courses.models import Course
 from users.models import User
 # Create your models here.
 
@@ -19,6 +20,7 @@ class Channel(models.Model):
     name = models.CharField(max_length=255, unique=True)
     date_posted = models.DateTimeField(default=timezone.now)
     subscribers = models.ManyToManyField(User)
+    course = models.ForeignKey(Course)
 
     def subscribe(self, user):
         self.subscribers.add(user)
@@ -59,8 +61,9 @@ class Post(models.Model):
 
     def notify(self):
         for subscriber in self.posted_in.subscribers.all():
-            m = Message(messageText='New post in channel: ' + self.posted_in.name, recipient=subscriber)
-            m.save()
+            if subscriber.username != self.created_by.username:
+                m = Message(messageText='New post in channel: ' + self.posted_in.name, recipient=subscriber)
+                m.save()
 
     def __str__(self):
         return str(self.title)
