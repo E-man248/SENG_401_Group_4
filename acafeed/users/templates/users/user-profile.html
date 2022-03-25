@@ -12,21 +12,14 @@
     <!-- Main Content -->
     <article>
       <fieldset>
-        <form action="" method="post">
-          <p><label for="username">Username:</label>
-            <input type="text" name="username" id="username" placeholder="USERNAME HERE"/></p>
-          <p><label for="password">Password:</label>
-            <input type="password" name="password" id="password"/></p>
-          <p><label for="fname">First Name:</label>
-            <input type="text" name="fname" id="fname" placeholder="NAME HERE"/></p>
-          <p><label for="lname">Last Name:</label>
-            <input type="text" name="lname" id="lname" placeholder="NAME HERE"/></p>
-          <p><label for="email">Email:</label>
-            <input type="text" name="email" id="email" placeholder="EMAIL HERE"/></p>
-          <p><label for="school">School: (dropdown)</label>
-          <p><label for="major">Major: (dropdown)</label>
-          <p><center><input type="submit" value="Save Changes"></center></p>
-        </form>
+        {% if error %}
+        <div> {{error}} </div>
+        {% endif %}
+        <form action="{% url 'users:userprofile' %}" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <center><input type="submit" value="Save Changes"></center>
+      </form>
       </fieldset>
     </article>
 
