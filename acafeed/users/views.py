@@ -17,11 +17,12 @@ def users_login(request):
     if request.method == 'POST':
         userName = request.POST['userName']
         password = request.POST['password']
+        error = "This username has been banned"
         if User.objects.filter(userName=userName, password=password).exists():
             user = User.objects.get(userName=userName)
             checked_blocked = user.blocked
             if checked_blocked == True:
-                return render(request, 'users/login.html', {'form': form})
+                return render(request, 'users/login.html', {'form': form, 'error': error})
             # This is a session variable and will remain existing as long as you don't delete this manually or clear your browser cache
             request.session['user_id'] = user.id
             return redirect('courses:mycourses')

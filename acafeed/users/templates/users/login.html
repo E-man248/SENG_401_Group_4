@@ -16,6 +16,9 @@
       <!-- Main Content -->
 	  <article>
           <fieldset>
+            {% if error %}
+            <div> {{error}} </div>
+            {% endif %}
             <form action="{% url 'users:login' %}" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
