@@ -51,7 +51,7 @@ class Post(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     posted_in = models.ForeignKey(Channel, on_delete=models.CASCADE)
 
-    # tags = models.ManyToManyField(PostTag)
+    tags = models.ManyToManyField(PostTag)
 
     class Meta:
         unique_together = ('title', 'created_by', 'posted_in')
