@@ -1,78 +1,56 @@
-{% extends 'base_layout.html' %}   
+{% extends 'base_layout.html' %}
 
 {% block content %}
 
-    <!-- Header -->
-    {% include 'navbar.html' %}
+<!-- Header -->
+{% include 'navbar.html' %}
 
-    <!-- Title -->
-    <h2>Classes</h2>
-    <!-- Top box with all drop downs  -->
+<!-- Title -->
+<h2>Classes</h2>
+<!-- Top box with all drop downs  -->
+<div>
     <div>
-        <div>
-            <h2> Major</h2>
-            <h3><label for="major-selection">Choose a major:</label>
-                <select name="major-selection" id="major-selection">
-                    <option value="seng">Software Engineering</option>
-                    <option value="mech">Mechanical Engineering</option>
-                    <option value="electrical">Electrical Engineering</option>
-                    <option value="civil">Civil Engineering</option>
-                    <option value="geomatics">Geomatics Engineering</option>
-                </select>
-            </h3>
-        </div>
-        <div>
-            <h2> Year</h2>
-            <h3><label for="major-selection">Choose a year:</label>
-                <select name="major-selection" id="major-selection">
-                    <option value="first">First Year</option>
-                    <option value="second">Second Year</option>
-                    <option value="third">Third Year</option>
-                    <option value="fourth">Fourth Year</option>
+        <h2> Major</h2>
+        <h3> {{myFilter.form.faculty.label_tag}} {{myFilter.form.faculty}}</h3>
 
-                </select>
-            </h3>
-        </div>
-        <div>
-            <form id="form">
-                <input type="search" id="query" name="q" placeholder="Search...">
-                <button>Search</button>
-            </form>
-        </div>
+    </div>
+    <div>
+        <h2> Year</h2>
+        <h3> {{myFilter.form.year.label_tag}}
+            {{myFilter.form.year}}</h3>
+
+    </div>
+    <div>
+        <form id="form">
+            {{myFilter.form.search}}
+            <button type='submit'>Search</button>
+
+        </form>
+    </div>
 
 
+
+</div>
+
+
+<main>
+
+    <!-- Main Content -->
+
+
+    <div>
+        <h4>
+            <input type="checkbox" id="seng471" name="seng471" checked>
+            <label for="seng471">Software Requirements Engineering [SENG 471]</label>
+            <br>
+            </br>
+            <input type="checkbox" id="seng438" name="seng438">
+            <label for="seng438">Software Testing, Reliability, and Quality [SENG 438] </label>
+        </h4>
 
     </div>
 
 
-    <main>
-        <script>
-            document.querySelector("[name=test]").addEventListener("click",
-                e => {
-                    let tgt = e.target;
-                    if (tgt.name === "colors") {
-                        let checked = [...e.currentTarget.querySelectorAll(`[name=${tgt.name}]:checked`)];
-                        document.getElementById("res").innerHTML = checked.map(inp => inp.value).join(", ")
-                    }
-                })
-
-        </script>
-        <!-- Main Content -->
-
-
-        <div>
-            <h4>
-                <input type="checkbox" id="seng471" name="seng471" checked>
-                <label for="seng471">Software Requirements Engineering [SENG 471]</label>
-                <br>
-                </br>
-                <input type="checkbox" id="seng438" name="seng438">
-                <label for="seng438">Software Testing, Reliability, and Quality [SENG 438] </label>
-            </h4>
-
-        </div>
-
-
-    </main>
+</main>
 
 {% endblock %}
