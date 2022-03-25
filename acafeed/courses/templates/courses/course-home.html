@@ -12,13 +12,10 @@
       <!-- Sidebar -->
       <aside>
 
-        <h3>Users</h3>
-
-        <p>heidi123</p>
-
-        <p>aiden456</p>
-
-        <p>priyanka789</p>
+        <h3>Section Number: </h3>
+        <h3>Faculty: </h3>
+        <h3>Professor: </h3>
+        <h3>Section Number: </h3>
 
       </aside>
 
@@ -26,14 +23,13 @@
       <article>
         <h3>Channels</h3>
 
-        <ul>
-          <li><a href="#">#Homework</a></li>
-          <li><a href="#">#Midterm Prep</a></li>
-          <li><a href="#">#Lectures</a></li>
-          <li><a href="#">#Announcements</a></li>
-          <li><a href="#">#Reminders</a></li>
-          <li><a href="#">#Final Prep</a></li>
-        </ul>
+          {% for channel in course.channels.all %}
+          <ul>
+          <li><a href="{% url 'channels:channelhome' %}">{{ channel }}</a></li>
+          </ul>
+          {% endfor %}
+
+
       </article>
 
     </main>

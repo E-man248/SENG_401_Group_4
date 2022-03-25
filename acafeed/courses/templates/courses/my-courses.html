@@ -13,7 +13,7 @@
     <article>
       {% for course in user.courses.all %}
       <ul>
-        <li><a href="#">{{ course }}</a></li>
+        <li><a href="{% url 'courses:coursehome' %}">{{ course }}</a></li>
       </ul>
       {% endfor %}
     </article>

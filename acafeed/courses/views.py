@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from users.models import User
 from .filter import FindCourseFilter
+from .models import Course
 
 # Create your views here.
 
