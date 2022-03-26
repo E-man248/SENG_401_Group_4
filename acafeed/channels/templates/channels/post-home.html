@@ -37,30 +37,20 @@
         <h3>Replies</h3>
         <!-- Replies -->
 
-
+        {% for reply in post.reply_set.all %}
         <article>
             <p>
-              Reply body 1
+                {{ reply.reply_content }}
             </p>
-            <p><b>Reply user 1</b>
+            <p><b>{{ reply.created_by }}</b>
                 <span style="float:right;">
-                    Reply date 1
+                    {{ reply.reply_date}}
                 </span>
             </p>
         </article>
         <br>
 
-        <article>
-            <p>
-              Reply body 2
-            </p>
-            <p><b>Reply user 2</b>
-                <span style="float:right;">
-                    Reply date 2
-                </span>
-            </p>
-        </article>
-        <br>
+        {% endfor %}
 
         
 
