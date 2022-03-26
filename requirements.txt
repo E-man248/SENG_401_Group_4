@@ -7,3 +7,5 @@ eventsourcing~=9.2.2
 pip~=22.0.3
 wheel~=0.37.1
 setuptools~=60.9.3
+django-filter==21.1
+django-property-filter==1.1.0
