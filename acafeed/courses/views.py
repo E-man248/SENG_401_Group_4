@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from users.models import User
 from .filter import FindCourseFilter
 from .models import Course
+from .forms import *
 
 # Create your views here.
 
@@ -35,3 +36,10 @@ def courses_mycourses(request):
         return render(request, 'courses/my-courses.html', {'user': user})
     else:
         return redirect('users:login')
+
+
+def read_message(request):
+    readMessages = request.POST.getlist('messages')
+    if 'user_id' in request.session:
+        user = get_user(request)
+        return render(request, 'courses/my-courses.html', {'user': user})
