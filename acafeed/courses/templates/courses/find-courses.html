@@ -33,8 +33,20 @@
 
     <div>
         <h4>
-            <input type="checkbox" id="seng471" name="seng471" checked>
-            <label for="seng471">{{ result }}</label>
+
+            <label for="courses">
+                <h3>
+
+                {% for r in result %}
+                <input type="checkbox" id="courses">
+                  {{ r }}
+                </input>
+
+                {% endfor %}
+
+                </h3>
+
+            </label>
             <br>
         </h4>
 

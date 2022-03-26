@@ -39,6 +39,6 @@ class FindCourseFilter(PropertyFilterSet):
 
     def filter_by_all_name_fields(self, queryset, name, value):
         return queryset.filter(
-            Q(nameicontains=value) | Q(courseCodeicontains=value) | Q(
-                sectionNumbericontains=value) | Q(facultyicontains=value) | Q(professor__icontains=value) | Q(professorEmailicontains=value) | Q(yearicontains=value)
+            Q(name=value) | Q(courseCode=value) | Q(
+                sectionNumber=value) | Q(faculty=value) | Q(professor=value) | Q(professorEmail=value) | Q(year=value)
         )
