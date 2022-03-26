@@ -32,7 +32,7 @@ class AdminForm(forms.ModelForm):
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = models.User
-        fields = ['name', 'year', 'password', 'major', 'school']
+        fields = ['name', 'year', 'major', 'school']
         widgets = {
             'password': forms.PasswordInput(),
         }

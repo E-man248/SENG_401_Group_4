@@ -55,7 +55,6 @@ def users_userprofile(request):
     if 'user_id' in request.session:
         form = EditProfileForm(initial={'name': User.objects.get(id=request.session['user_id']).name,
                                         'year': User.objects.get(id=request.session['user_id']).year,
-                                        'password': User.objects.get(id=request.session['user_id']).password,
                                         'major': User.objects.get(id=request.session['user_id']).major,
                                         'school': User.objects.get(id=request.session['user_id']).school})
         if request.method == 'POST':

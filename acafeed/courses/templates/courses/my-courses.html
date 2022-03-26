@@ -25,9 +25,16 @@
 
     <article>
       <h3>Messages</h3>
-      <p>No new notifications.</p>
+      {% for message in user.getAllMessages %}
+      <ul>
+        <li>{{ message }}</li>
+      </ul>
+      {% endfor %}
+      {% if not user.getAllMessages%}
+        <p>No new notifications.</p>
+      {% endif %}
     </article>
-    
+
 
   </main>
 
