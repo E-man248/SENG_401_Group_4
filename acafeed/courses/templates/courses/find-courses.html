@@ -35,14 +35,18 @@
         <h4>
 
             <label for="courses">
+
                 <h3>
-
+            <center>
                 {% for r in result %}
-                <input type="checkbox" id="courses">
-                  {{ r }}
+                <input type="checkbox" id="checked_courses">
+                        {{ r }}
                 </input>
-
+                    <br></br>
+            </center>
                 {% endfor %}
+
+                    <center><button type="submit"> Add to My Courses </button></center>
 
                 </h3>
 
