@@ -20,7 +20,7 @@ class Channel(models.Model):
     name = models.CharField(max_length=255, unique=True)
     date_posted = models.DateTimeField(default=timezone.now)
     subscribers = models.ManyToManyField(User)
-    course = models.ForeignKey(Course)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
 
     def subscribe(self, user):
         self.subscribers.add(user)
