@@ -38,9 +38,9 @@
       <article>
         <h3>Channels</h3>
 
-          {% for channel in course.channels.all %}
+          {% for channel in course.channel_set.all %}
           <ul>
-          <li><a href="{% url 'channels:channelhome' %}">{{ channel }}</a></li>
+          <li><a href="{% url 'channels:channelhome' %}?name={{channel.id}}">{{ channel }}</a></li>
           </ul>
           {% endfor %}
 
