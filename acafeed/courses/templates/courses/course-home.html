@@ -11,7 +11,7 @@
 
     <!-- Title -->
 {% for course in user.courses.all %}
-{% if course.id == request.get_full_path|cut:'/course-home/?name='|add:"0" %}
+{% if course.id == request.get_full_path|cut:'/course-home/?course_id='|add:"0" %}
 
     <h2>{{ course }}</h2>
 
@@ -40,7 +40,7 @@
 
           {% for channel in course.channel_set.all %}
           <ul>
-          <li><a href="{% url 'channels:channelhome' %}?name={{channel.id}}">{{ channel }}</a></li>
+          <li><a href="{% url 'channels:channelhome' %}?channel_id={{channel.id}}">{{ channel }}</a></li>
           </ul>
           {% endfor %}
 

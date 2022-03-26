@@ -28,6 +28,8 @@ def channels_posthome(request):
     if 'user_id' in request.session:
         user = get_user(request)
         return render(request, 'channels/post-home.html', {'user': user})
+    else:
+        return redirect('users:login')
 
 def get_user(request):
     if 'user_id' in request.session:

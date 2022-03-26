@@ -8,7 +8,7 @@
   <!-- Title -->
 {% for course in user.courses.all %}
 {% for channel in course.channel_set.all %}
-{% if channel.id == request.get_full_path|cut:'/channel-home/?name='|add:"0" %}
+{% if channel.id == request.get_full_path|cut:'/channel-home/?channel_id='|add:"0" %}
 
   <h2>{{ channel }}</h2>
 
@@ -20,9 +20,9 @@
     <!-- Main Content -->
     <article>
       <h3>Posts</h3>
-      {% for post in channel.posts.all %}
+      {% for post in channel.post_set.all %}
           <ul>
-         <li><a href="{% url 'channels:posthome' %}">{{ post }}</a></li>
+         <li><a href="{% url 'channels:posthome' %}?post_id={{post.id}}">{{ post }}</a></li>
          </ul>
       {% endfor %}
     </article>

@@ -3,13 +3,17 @@
 {% block content %}
 
     <!-- Header -->
-    {% include 'navbar.html' %}
+{% include 'navbar.html' %}
+
+{% for course in user.courses.all %}
+{% for channel in course.channel_set.all %}
+{% for post in channel.post_set.all %}
+{% if post.id == request.get_full_path|cut:'/post-home/?post_id='|add:"0" %}
+
 
 <body>
     <!-- Title -->
-    <h2>SENG 401</h2>
-    <h3>#Final Prep</h3>
-    <h3>Should I read the textbook?</h3>
+    <h2>{{ post }}</h2>
 
 
     <!-- Delete button, should only be visible to admins: -->
@@ -20,11 +24,11 @@
         <!-- Main Post -->
         <article>
             <p>
-              Haven't looked at it yet, will it help for the final?
+                {{ post.content }}
             </p>
-            <p><b>heidi123</b>
+            <p><b>{{ post.created_by }}</b>
                 <span style="float:right;">
-                    February 15, 18:30
+                    {{ post.date_posted }}
                 </span>
             </p>
         </article>
@@ -32,13 +36,15 @@
 
         <h3>Replies</h3>
         <!-- Replies -->
+
+
         <article>
             <p>
-              No don't bother
+              Reply body 1
             </p>
-            <p><b>aiden456</b>
+            <p><b>Reply user 1</b>
                 <span style="float:right;">
-                    February 16, 09:10
+                    Reply date 1
                 </span>
             </p>
         </article>
@@ -46,11 +52,11 @@
 
         <article>
             <p>
-              This course has a textbook?
+              Reply body 2
             </p>
-            <p><b>randomusername</b>
+            <p><b>Reply user 2</b>
                 <span style="float:right;">
-                    February 17, 13:30
+                    Reply date 2
                 </span>
             </p>
         </article>
@@ -85,5 +91,10 @@
         </a>
 
     </div>
+
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    {% endfor %}
 
 {% endblock %}
