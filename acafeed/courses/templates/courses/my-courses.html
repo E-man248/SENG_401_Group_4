@@ -25,12 +25,13 @@
 
     <article>
       <h3>Messages</h3>
-      {% for message in user.getAllMessages %}
-      <ul>
-        <li>{{ message }}</li>
-      </ul>
-      {% endfor %}
-      {% if not user.getAllMessages%}
+      <form method = "GET">
+        {% for message in user.getAllMessages %}
+          <p><input type="checkbox" id="message">{{ message }}</input></p>
+        {% endfor %}
+        <center><input type="submit" value="Mark As Read"></center>
+      </form>
+      {% if not user.getAllMessages %}
         <p>No new notifications.</p>
       {% endif %}
     </article>
