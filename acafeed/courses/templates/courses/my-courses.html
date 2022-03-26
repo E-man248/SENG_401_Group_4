@@ -14,7 +14,7 @@
       <h3>My Courses</h3>
       {% for course in user.courses.all %}
       <ul>
-        <li><a href="{% url 'courses:coursehome' %}">{{ course }}</a></li>
+        <li><a href="{% url 'courses:coursehome' %}?name={{course.id}}">{{ course }}</a></li>
       </ul>
       {% endfor %}
 
