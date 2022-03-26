@@ -11,7 +11,11 @@ def courses_admincreatecourse(request):
 
 
 def courses_coursehome(request):
-    return render(request, 'courses/course-home.html')
+    if 'user_id' in request.session:
+        user = get_user(request)
+        return render(request, 'courses/course-home.html', {'user': user})
+    else:
+        return redirect('users:login')
 
 
 def courses_findcourses(request):

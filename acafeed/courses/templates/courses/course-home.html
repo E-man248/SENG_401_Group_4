@@ -1,21 +1,36 @@
-{% extends 'base_layout.html' %}   
+{% extends 'base_layout.html' %}
 
 {% block content %}
 
-    <!-- Header -->
+<!-- Header -->
     {% include 'navbar.html' %}
 
+
+
+
+
     <!-- Title -->
-    <h2>SENG 401</h2>
+{% for course in user.courses.all %}
+{% if course.id == request.get_full_path|cut:'/course-home/?name='|add:"0" %}
+
+    <h2>{{ course }}</h2>
+
+
+
+
     <main>
 
       <!-- Sidebar -->
       <aside>
 
         <h3>Section Number: </h3>
+          <p>{{ course.sectionNumber }}</p>
         <h3>Faculty: </h3>
+          <p>{{ course.faculty }}</p>
         <h3>Professor: </h3>
+          <p>{{ course.professor}}</p>
         <h3>Section Number: </h3>
+          <p>{{ course.sectionNumber }}</p>
 
       </aside>
 
@@ -33,5 +48,8 @@
       </article>
 
     </main>
+
+{% endif %}
+{% endfor %}
 
 {% endblock %}
