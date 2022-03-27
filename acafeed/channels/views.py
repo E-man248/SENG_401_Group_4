@@ -1,7 +1,7 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .models import User, Post, Channel
-from .forms import PostForm
+from .forms import *
 from . import models
 from django.utils import timezone
 from django.db import models
@@ -10,9 +10,16 @@ from django.db import models
 
 
 def channels_admincreatechannel(request):
-    if 'user_id' in request.session:
-        user = get_user(request)
-        return render(request, 'channels/admin-create-channel.html', {'user': user})
+    form = AddChannelForm()
+    if request.method == 'POST':
+        if Channel.objects.filter(name=request.POST['name']).exists():
+            error = "This channel already exists"
+            return render(request, 'channels/admin-create-channel.html', {'form': form, 'error': error})
+        form = AddChannelForm(request.POST)
+        new_channel = form.save(commit=False)
+        new_channel.save()
+        return redirect('channels:admincreatechannel')
+    return render(request, 'channels/admin-create-channel.html', {'form': form})
 
 
 def channels_channelhome(request):

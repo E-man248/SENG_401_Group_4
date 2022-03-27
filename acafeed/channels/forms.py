@@ -8,3 +8,9 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = models.Post
         fields = ['title', 'content']
+
+
+class AddChannelForm(forms.ModelForm):
+    class Meta:
+        model = models.Channel
+        fields = ['name', 'course']
