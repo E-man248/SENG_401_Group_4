@@ -42,7 +42,7 @@ def channels_createpost(request):
         if request.method == 'POST':
             if Post.objects.filter(title=request.POST['title']).exists():
                 error = "A post already exists with that title!"
-                return render(request, 'channels/channel-home.html', {'form': form, 'error': error, 'user': user})
+                return render(request, 'channels/create-post.html', {'form': form, 'error': error, 'user': user})
             form = PostForm(request.POST)
             new_post = form.save(commit=False)
             new_post.date_posted = timezone.now()
@@ -55,32 +55,21 @@ def channels_createpost(request):
         return redirect('users:login')
 
 
-def channels_createreply(request):
-    if 'user_id' in request.session:
-        user = get_user(request)
-        post_id = request.GET.get('post_id')
-        form = ReplyForm()
-
-        if request.method == 'GET':
-            request.session['last_page'] = request.META.get('HTTP_REFERER', '/')
-
-        if request.method == 'POST':
-            form = ReplyForm(request.POST)
-            new_reply = form.save(commit=False)
-            new_reply.date_posted = timezone.now()
-            new_reply.created_by = user
-            new_reply.reply_to = Post.objects.get(id=post_id).created_by
-            new_reply.save()
-            return HttpResponseRedirect(request.session['last_page'])
-        return render(request, 'channels/post-home.html', {'form': form, 'user': user})
-    else:
-        return redirect('users:login')
-
-
 def channels_posthome(request):
     if 'user_id' in request.session:
         user = get_user(request)
-        return render(request, 'channels/post-home.html', {'user': user})
+        post_id = request.GET.get('post_id')
+
+        form = ReplyForm()
+        if request.method == 'POST':
+            form = ReplyForm(request.POST)
+            new_reply = form.save(commit=False)
+            new_reply.reply_date = timezone.now()
+            new_reply.created_by = user
+            new_reply.reply_to = Post.objects.get(id=post_id)
+            new_reply.save()
+            return render(request, 'channels/post-home.html', {'form': form, 'user': user})
+        return render(request, 'channels/post-home.html', {'form': form, 'user': user})
     else:
         return redirect('users:login')
 

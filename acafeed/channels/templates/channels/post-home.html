@@ -11,7 +11,6 @@
 {% if post.id == request.get_full_path|cut:'/post-home/?post_id='|add:"0" %}
 
 
-<body>
     <!-- Title -->
     <h2><a href="{% url 'courses:coursehome' %}?course_id={{course.id}}">{{ course }}</a></h2>
     <h2><a href="{% url 'channels:channelhome' %}?channel_id={{channel.id}}">#{{ channel }}</a></h2>
@@ -55,36 +54,34 @@
         {% endfor %}
 
         
-
-
-
-        <main>
-        <textarea class="replyPost" id="reply" name="reply"
-            placeholder="Enter your reply here... Remember, please be nice!" cols="200"
-            rows="10"></textarea>
-        </main>
-
-
-
-
     <script>
         function Replyconfirm() {
             if (window.confirm('Post your reply?')) {
                 window.location.href = '#';
             }
         }
-
     </script>
 
-      <fieldset>
-        <form action="{% url 'channels:posthome' %}" method="post">
-          {% csrf_token %}
-          {{ form.as_p }}
-            <div style="padding-top: 1%; padding-right: 1%; padding-bottom: 3%; text-align: right">
+
+        <main>
+
+
+            <fieldset>
+            <form action="{% url 'channels:posthome' %}?post_id={{post.id}}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div style="padding-top: 1%; padding-right: 1%; padding-bottom: 3%; text-align: right">
                 <input type="submit" value="Reply" onclick="Replyconfirm();">
-            </div>
-        </form>
-      </fieldset>
+                </div>
+            </form>
+            </fieldset>
+
+
+        </main>
+
+
+
+
 
     {% endif %}
     {% endfor %}

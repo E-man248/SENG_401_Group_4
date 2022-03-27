@@ -14,7 +14,13 @@
     <h2><a href="{% url 'channels:channelhome' %}?channel_id={{channel.id}}">#{{ channel }}</a></h2>
     <h2>New Post</h2>
 
-
+    <script>
+        function Postconfirm() {
+            if (window.confirm('Create your post?')) {
+                window.location.href = '#';
+            }
+        }
+    </script>
 
     <main>
 
@@ -22,13 +28,17 @@
 
         <fieldset>
             {% if error %}
-            <div> {{error}} </div>
+            <p> {{error}} </p>
             {% endif %}
+            <div style="padding-top: 1%; padding-right: 22%; padding-bottom: 3%; text-align: left">
             <form action="{% url 'channels:createpost' %}?channel_id={{channel.id}}" method="post">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <input type="submit" value="Post" />
+
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                <input type="submit" value="Post" onclick="Postconfirm()" />
+
             </form>
+                </div>
         </fieldset>
 
 
