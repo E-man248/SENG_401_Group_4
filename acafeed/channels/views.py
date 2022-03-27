@@ -10,16 +10,20 @@ from django.db import models
 
 
 def channels_admincreatechannel(request):
-    form = AddChannelForm()
-    if request.method == 'POST':
-        if Channel.objects.filter(name=request.POST['name']).exists():
-            error = "This channel already exists"
-            return render(request, 'channels/admin-create-channel.html', {'form': form, 'error': error})
-        form = AddChannelForm(request.POST)
-        new_channel = form.save(commit=False)
-        new_channel.save()
-        return redirect('channels:admincreatechannel')
-    return render(request, 'channels/admin-create-channel.html', {'form': form})
+    if 'user_id' in request.session:
+        user = get_user(request)
+        form = AddChannelForm()
+        if request.method == 'POST':
+            if Channel.objects.filter(name=request.POST['name']).exists():
+                error = "This channel already exists"
+                return render(request, 'channels/admin-create-channel.html', {'form': form, 'error': error, 'user': user})
+            form = AddChannelForm(request.POST)
+            new_channel = form.save(commit=False)
+            new_channel.save()
+            return redirect('channels:admincreatechannel')
+        return render(request, 'channels/admin-create-channel.html', {'form': form, 'user': user})
+    else:
+        return redirect('users:login')
 
 
 def channels_channelhome(request):
