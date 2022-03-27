@@ -63,7 +63,7 @@ class Post(models.Model):
 
 class Reply(models.Model):
     reply_content = models.TextField(max_length=255)
-    reply_date = models.DateField(default=timezone.now)
+    reply_date = models.DateTimeField(default=timezone.now)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     reply_to = models.ForeignKey(Post, on_delete=models.CASCADE)
 
