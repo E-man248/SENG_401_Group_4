@@ -13,6 +13,8 @@
 
 <body>
     <!-- Title -->
+    <h2><a href="{% url 'courses:coursehome' %}?course_id={{course.id}}">{{ course }}</a></h2>
+    <h2><a href="{% url 'channels:channelhome' %}?channel_id={{channel.id}}">#{{ channel }}</a></h2>
     <h2>{{ post }}</h2>
 
 

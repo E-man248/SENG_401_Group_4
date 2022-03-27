@@ -10,7 +10,8 @@
 {% for channel in course.channel_set.all %}
 {% if channel.id == request.get_full_path|cut:'/channel-home/?channel_id='|add:"0" %}
 
-  <h2>{{ channel }}</h2>
+  <h2><a href="{% url 'courses:coursehome' %}?course_id={{course.id}}">{{ course }}</a></h2>
+  <h2>#{{ channel }}</h2>
 
   <a href="#">
     <button type="button">Subscribe</button>
@@ -30,7 +31,7 @@
   </main>
 
   <div style="padding-top: 2%; padding-bottom: 2%; text-align: center">
-    <a href="{% url 'channels:createpost' %}">
+    <a href="{% url 'channels:createpost' %}?channel_id={{channel.id}}">
       <button type="button">Write a Post</button>
     </a>
 

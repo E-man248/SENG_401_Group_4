@@ -40,7 +40,7 @@
 
           {% for channel in course.channel_set.all %}
           <ul>
-          <li><a href="{% url 'channels:channelhome' %}?channel_id={{channel.id}}">{{ channel }}</a></li>
+          <li><a href="{% url 'channels:channelhome' %}?channel_id={{channel.id}}">#{{ channel }}</a></li>
           </ul>
           {% endfor %}
 
