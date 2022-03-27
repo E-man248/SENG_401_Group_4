@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm, LoginForm
+from .forms import RegisterForm, LoginForm, EditProfileForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import User
@@ -51,10 +51,17 @@ def users_logout(request):
         return redirect('users:login')
 
 
-def users_myaccount(request):
+def users_userprofile(request):
     if 'user_id' in request.session:
-        user = get_user(request)
-        return render(request, 'users/user-profile.html', {'user': user})
+        form = EditProfileForm(initial={'name': User.objects.get(id=request.session['user_id']).name,
+                                        'year': User.objects.get(id=request.session['user_id']).year,
+                                        'major': User.objects.get(id=request.session['user_id']).major,
+                                        'school': User.objects.get(id=request.session['user_id']).school})
+        if request.method == 'POST':
+            form = EditProfileForm(request.POST)
+            form.save(commit=False)
+            return redirect('users:userprofile')
+        return render(request, 'users/user-profile.html', {'form': form})
 
 
 def users_adminmenu(request):

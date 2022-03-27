@@ -5,46 +5,41 @@
     <!-- Header -->
     {% include 'navbar.html' %}
 
-    <!-- Title -->
-    <h2>SENG 401</h2>
-    <h3>#Final Prep</h3>
-    <h3>Title: #SENG401FinalPrep
+{% for course in user.courses.all %}
+{% for channel in course.channel_set.all %}
+{% if channel.id == request.get_full_path|cut:'/create-post/?channel_id='|add:"0" %}
 
-    </h3>
+    <!-- Title -->
+    <h2><a href="{% url 'courses:coursehome' %}?course_id={{course.id}}">{{ course }}</a></h2>
+    <h2><a href="{% url 'channels:channelhome' %}?channel_id={{channel.id}}">#{{ channel }}</a></h2>
+    <h2>New Post</h2>
+
+
+
     <main>
 
         <!-- Main Content -->
 
-        <textarea class="contentPost" id="content" name="conent"
-            placeholder="Enter content regarding the topic here... Remember, please be nice!" cols="200"
-            rows="20"></textarea>
+        <fieldset>
+            {% if error %}
+            <div> {{error}} </div>
+            {% endif %}
+            <form action="{% url 'channels:createpost' %}?channel_id={{channel.id}}" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Post" />
+            </form>
+        </fieldset>
 
 
 
 
 
     </main>
-    <script>
-        function Submitconfirm() {
-            if (window.confirm('Are you ready to Post?')) {
-                window.location.href = 'channel-home.html';
-            }
-        }
-        function Cancelconfirm() {
-            if (window.confirm('Are you sure you want to cancel?')) {
-                window.location.href = 'channel-home.html';
-            }
-        }
-    </script>
 
-    <div style="padding-top: 5%; padding-bottom: 2%; text-align: center">
-        <a href="channel-home.html">
-            <button type="button" onclick="Submitconfirm(); return false;">Post
-            </button>
-        </a>
-        <div class="divider"></div>
-        <button type="button" onclick="Cancelconfirm(); return false;">Cancel</button>
 
-    </div>
+{% endif %}
+{% endfor %}
+{% endfor %}
 
 {% endblock %}

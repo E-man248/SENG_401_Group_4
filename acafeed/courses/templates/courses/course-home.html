@@ -1,24 +1,36 @@
-{% extends 'base_layout.html' %}   
+{% extends 'base_layout.html' %}
 
 {% block content %}
 
-    <!-- Header -->
+<!-- Header -->
     {% include 'navbar.html' %}
 
+
+
+
+
     <!-- Title -->
-    <h2>SENG 401</h2>
+{% for course in user.courses.all %}
+{% if course.id == request.get_full_path|cut:'/course-home/?course_id='|add:"0" %}
+
+    <h2>{{ course }}</h2>
+
+
+
+
     <main>
 
       <!-- Sidebar -->
       <aside>
 
-        <h3>Users</h3>
-
-        <p>heidi123</p>
-
-        <p>aiden456</p>
-
-        <p>priyanka789</p>
+        <h3>Section Number: </h3>
+          <p>{{ course.sectionNumber }}</p>
+        <h3>Faculty: </h3>
+          <p>{{ course.faculty }}</p>
+        <h3>Professor: </h3>
+          <p>{{ course.professor}}</p>
+        <h3>Section Number: </h3>
+          <p>{{ course.sectionNumber }}</p>
 
       </aside>
 
@@ -26,16 +38,18 @@
       <article>
         <h3>Channels</h3>
 
-        <ul>
-          <li><a href="#">#Homework</a></li>
-          <li><a href="#">#Midterm Prep</a></li>
-          <li><a href="#">#Lectures</a></li>
-          <li><a href="#">#Announcements</a></li>
-          <li><a href="#">#Reminders</a></li>
-          <li><a href="#">#Final Prep</a></li>
-        </ul>
+          {% for channel in course.channel_set.all %}
+          <ul>
+          <li><a href="{% url 'channels:channelhome' %}?channel_id={{channel.id}}">#{{ channel }}</a></li>
+          </ul>
+          {% endfor %}
+
+
       </article>
 
     </main>
+
+{% endif %}
+{% endfor %}
 
 {% endblock %}

@@ -10,21 +10,35 @@
   <main>
     <!-- Main Content -->
     
-    <article>
+    <aside>
+      <h3>My Courses</h3>
       {% for course in user.courses.all %}
       <ul>
-        <li><a href="#">{{ course }}</a></li>
+        <li><a href="{% url 'courses:coursehome' %}?course_id={{course.id}}">{{ course }}</a></li>
       </ul>
       {% endfor %}
+
+      <a href="{% url 'courses:findcourses' %}">
+      <center><button type="button">Find Courses</button></center>
+      </a>
+    </aside>
+
+    <article>
+      <h3>Messages</h3>
+      <form method = "GET">
+        {% for message in user.getAllMessages %}
+          <p><input type="checkbox" id="message">{{ message }}</input></p>
+        {% endfor %}
+        <center><input type="submit" value="Mark As Read"></center>
+      </form>
+      {% if not user.getAllMessages %}
+        <p>No new notifications.</p>
+      {% endif %}
     </article>
-    
+
 
   </main>
 
-  <div style="padding-top: 2%; padding-bottom: 2%; text-align: center">
-    <a href="{% url 'courses:findcourses' %}">
-      <button type="button">Find Courses</button>
-    </a>
-  </div>
+
 
 {% endblock %}

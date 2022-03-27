@@ -1,5 +1,7 @@
+from tkinter import CASCADE
 from django.db import models
 from django.utils import timezone
+from courses.models import Course
 from users.models import User
 # Create your models here.
 
@@ -8,17 +10,11 @@ from django.utils import timezone
 from users.models import User
 
 
-class PostTag(models.Model):
-    tagName = models.CharField(max_length=32)
-
-    def __str__(self):
-        return str(self.tagName)
-
-
 class Channel(models.Model):
     name = models.CharField(max_length=255, unique=True)
     date_posted = models.DateTimeField(default=timezone.now)
     subscribers = models.ManyToManyField(User)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, default=1)
 
     def subscribe(self, user):
         self.subscribers.add(user)
@@ -51,16 +47,28 @@ class Post(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     posted_in = models.ForeignKey(Channel, on_delete=models.CASCADE)
 
-    tags = models.ManyToManyField(PostTag)
-
     class Meta:
         unique_together = ('title', 'created_by', 'posted_in')
         ordering = ['date_posted']
 
     def notify(self):
         for subscriber in self.posted_in.subscribers.all():
-            m = Message(messageText='New post in channel: ' + self.posted_in.name, recipient=subscriber)
-            m.save()
+            if subscriber.username != self.created_by.username:
+                m = Message(messageText='New post in channel: ' + self.posted_in.name, recipient=subscriber)
+                m.save()
 
     def __str__(self):
         return str(self.title)
+
+
+class Reply(models.Model):
+    reply_content = models.TextField(max_length=255)
+    reply_date = models.DateField(default=timezone.now)
+    created_by = models.ForeignKey(User,on_delete=models.CASCADE)
+    reply_to = models.ForeignKey(Post,on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['reply_date']
+
+    def __str__(self):
+        return str(self.reply_content)

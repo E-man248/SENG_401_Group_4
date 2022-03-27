@@ -21,7 +21,7 @@ class User(models.Model):
         return self.message_set.all()
 
     def getUnreadMesages(self):
-        ms = self.message_set.get(readFlag = False)
+        ms = self.message_set.filter(readFlag = False)
         for m in ms:
             m.readFlag = True
         return ms    

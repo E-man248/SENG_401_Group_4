@@ -6,5 +6,5 @@ from .models import *
 admin.site.register(Channel)
 admin.site.register(Post)
 admin.site.register(Message)
-admin.site.register(PostTag)
+admin.site.register(Reply)
 # Register your models here.

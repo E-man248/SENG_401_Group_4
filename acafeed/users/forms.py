@@ -27,3 +27,12 @@ class AdminForm(forms.ModelForm):
     class Meta:
         model = models.User
         fields = ['blocked']
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = models.User
+        fields = ['name', 'year', 'major', 'school']
+        widgets = {
+            'password': forms.PasswordInput(),
+        }

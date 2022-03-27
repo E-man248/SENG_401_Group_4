@@ -6,28 +6,40 @@
   {% include 'navbar.html' %}
 
   <!-- Title -->
-  <h2>SENG 401</h2>
-  <h2>#Final Prep</h2>
+{% for course in user.courses.all %}
+{% for channel in course.channel_set.all %}
+{% if channel.id == request.get_full_path|cut:'/channel-home/?channel_id='|add:"0" %}
+
+  <h2><a href="{% url 'courses:coursehome' %}?course_id={{course.id}}">{{ course }}</a></h2>
+  <h2>#{{ channel }}</h2>
+
+  <a href="#">
+    <button type="button">Subscribe</button>
+  </a>
 
   <main>
     <!-- Main Content -->
     <article>
       <h3>Posts</h3>
-      <ul>
-        <li><a href="#">W2021 Exam Q1 Help</a></li>
-        <li><a href="#">Are slides on the test?</a></li>
-        <li><a href="#">Should I read the textbook?</a></li>
-      </ul>
+      {% for post in channel.post_set.all %}
+          <ul>
+         <li><a href="{% url 'channels:posthome' %}?post_id={{post.id}}">{{ post }}</a></li>
+         </ul>
+      {% endfor %}
     </article>
 
   </main>
 
   <div style="padding-top: 2%; padding-bottom: 2%; text-align: center">
-    <a href="create-post.html">
+    <a href="{% url 'channels:createpost' %}?channel_id={{channel.id}}">
       <button type="button">Write a Post</button>
     </a>
 
 
   </div>
+
+{% endif %}
+{% endfor %}
+{% endfor %}
 
 {% endblock %}

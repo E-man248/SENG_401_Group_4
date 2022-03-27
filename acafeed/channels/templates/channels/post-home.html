@@ -3,13 +3,19 @@
 {% block content %}
 
     <!-- Header -->
-    {% include 'navbar.html' %}
+{% include 'navbar.html' %}
+
+{% for course in user.courses.all %}
+{% for channel in course.channel_set.all %}
+{% for post in channel.post_set.all %}
+{% if post.id == request.get_full_path|cut:'/post-home/?post_id='|add:"0" %}
+
 
 <body>
     <!-- Title -->
-    <h2>SENG 401</h2>
-    <h3>#Final Prep</h3>
-    <h3>Should I read the textbook?</h3>
+    <h2><a href="{% url 'courses:coursehome' %}?course_id={{course.id}}">{{ course }}</a></h2>
+    <h2><a href="{% url 'channels:channelhome' %}?channel_id={{channel.id}}">#{{ channel }}</a></h2>
+    <h2>{{ post }}</h2>
 
 
     <!-- Delete button, should only be visible to admins: -->
@@ -20,11 +26,11 @@
         <!-- Main Post -->
         <article>
             <p>
-              Haven't looked at it yet, will it help for the final?
+                {{ post.content }}
             </p>
-            <p><b>heidi123</b>
+            <p><b>{{ post.created_by }}</b>
                 <span style="float:right;">
-                    February 15, 18:30
+                    {{ post.date_posted }}
                 </span>
             </p>
         </article>
@@ -32,29 +38,21 @@
 
         <h3>Replies</h3>
         <!-- Replies -->
+
+        {% for reply in post.reply_set.all %}
         <article>
             <p>
-              No don't bother
+                {{ reply.reply_content }}
             </p>
-            <p><b>aiden456</b>
+            <p><b>{{ reply.created_by }}</b>
                 <span style="float:right;">
-                    February 16, 09:10
+                    {{ reply.reply_date}}
                 </span>
             </p>
         </article>
         <br>
 
-        <article>
-            <p>
-              This course has a textbook?
-            </p>
-            <p><b>randomusername</b>
-                <span style="float:right;">
-                    February 17, 13:30
-                </span>
-            </p>
-        </article>
-        <br>
+        {% endfor %}
 
         
 
@@ -85,5 +83,10 @@
         </a>
 
     </div>
+
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    {% endfor %}
 
 {% endblock %}
