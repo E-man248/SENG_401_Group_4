@@ -10,6 +10,12 @@ class PostForm(forms.ModelForm):
         fields = ['title', 'content']
 
 
+class ReplyForm(forms.ModelForm):
+    class Meta:
+        model = models.Reply
+        fields = ['reply_content']
+
+
 class AddChannelForm(forms.ModelForm):
     class Meta:
         model = models.Channel

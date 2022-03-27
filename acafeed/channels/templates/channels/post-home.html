@@ -76,13 +76,15 @@
 
     </script>
 
-    <div style="padding-top: 1%; padding-right: 1%; padding-bottom: 3%; text-align: right">
-        <a href="#">
-            <button type="button" onclick="Replyconfirm();">Post
-            </button>
-        </a>
-
-    </div>
+      <fieldset>
+        <form action="{% url 'channels:posthome' %}" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+            <div style="padding-top: 1%; padding-right: 1%; padding-bottom: 3%; text-align: right">
+                <input type="submit" value="Reply" onclick="Replyconfirm();">
+            </div>
+        </form>
+      </fieldset>
 
     {% endif %}
     {% endfor %}

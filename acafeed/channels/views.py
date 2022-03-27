@@ -55,12 +55,35 @@ def channels_createpost(request):
         return redirect('users:login')
 
 
+def channels_createreply(request):
+    if 'user_id' in request.session:
+        user = get_user(request)
+        post_id = request.GET.get('post_id')
+        form = ReplyForm()
+
+        if request.method == 'GET':
+            request.session['last_page'] = request.META.get('HTTP_REFERER', '/')
+
+        if request.method == 'POST':
+            form = ReplyForm(request.POST)
+            new_reply = form.save(commit=False)
+            new_reply.date_posted = timezone.now()
+            new_reply.created_by = user
+            new_reply.reply_to = Post.objects.get(id=post_id).created_by
+            new_reply.save()
+            return HttpResponseRedirect(request.session['last_page'])
+        return render(request, 'channels/post-home.html', {'form': form, 'user': user})
+    else:
+        return redirect('users:login')
+
+
 def channels_posthome(request):
     if 'user_id' in request.session:
         user = get_user(request)
         return render(request, 'channels/post-home.html', {'user': user})
     else:
         return redirect('users:login')
+
 
 def get_user(request):
     if 'user_id' in request.session:
