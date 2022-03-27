@@ -8,7 +8,17 @@ from .forms import *
 
 
 def courses_admincreatecourse(request):
-    return render(request, 'courses/admin-create-course.html')
+    form = AddCourseForm()
+    if request.method == 'POST':
+        if Course.objects.filter(name=request.POST['name']).exists():
+            error = "This course already exists"
+            return render(request, 'courses/admin-create-course.html', {'form': form, 'error': error})
+        form = AddCourseForm(request.POST)
+        new_course = form.save(commit=False)
+        new_course.save()
+        return redirect('courses:admincreatecourse')
+
+    return render(request, 'courses/admin-create-course.html', {'form': form})
 
 
 def courses_coursehome(request):
