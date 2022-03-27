@@ -67,15 +67,16 @@
 
 
             <fieldset>
+                <center>
             <form action="{% url 'channels:posthome' %}?post_id={{post.id}}" method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <div style="padding-top: 1%; padding-right: 1%; padding-bottom: 3%; text-align: right">
-                <input type="submit" value="Reply" onclick="Replyconfirm();">
+                <center><input type="submit" value="Reply" onclick="Replyconfirm();"></center>
                 </div>
             </form>
             </fieldset>
-
+            </center>
 
         </main>
 

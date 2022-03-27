@@ -22,9 +22,9 @@
         <form action="{% url 'users:signup' %}" method="post">
           {% csrf_token %}
           {{ form.as_p }}
-          <input type="submit" value="Signup">
+          <center><input type="submit" value="Signup"></center>
       </form>
-      <p>Already got an account? <a href="{% url 'users:login' %}">Sign In</a></p>
+      <center><p>Already got an account? <a href="{% url 'users:login' %}">Sign In</a></p></center>
       </fieldset>
     </article>
 

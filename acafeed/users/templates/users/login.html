@@ -17,7 +17,7 @@
 	  <article>
           <fieldset>
             {% if error %}
-            <div> {{error}} </div>
+            <center><p> {{error}} </p></center>
             {% endif %}
             <form action="{% url 'users:login' %}" method="post">
                 {% csrf_token %}
@@ -25,9 +25,9 @@
                 {% if request.GET.next %}
                     <input type="hidden" name="next" value="{{ request.GET.next }}" />
                 {% endif %}
-                <input type="submit" value="Login" />
+                <center><input type="submit" value="Login" /></center>
             </form>
-            <p>Not got an account? <a href="{% url 'users:signup' %}">Sign Up</a></p>
+            <center><p>Not got an account? <a href="{% url 'users:signup' %}">Sign Up</a></p></center>
           </fieldset>
 	  </article>
 
