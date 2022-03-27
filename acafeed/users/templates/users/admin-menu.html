@@ -18,6 +18,9 @@
           <a href="{% url 'channels:admincreatechannel' %}"><button>Create Channel</button></a></center>
           <br>
 
+        {% if error1 %}
+        <div> {{error1}} </div>
+        {% endif %}
         <form action="" method="post">
           {% csrf_token %}
           <p><label for="Ban">Ban User:</label>
@@ -25,6 +28,9 @@
             <input type="submit" value="Ban"></p>
         </form>
  
+        {% if error2 %}
+        <div> {{error2}} </div>
+        {% endif %}
         <form action="" method="post">
           {% csrf_token %}
           <p><label for="Unban">Remove Ban:</label>

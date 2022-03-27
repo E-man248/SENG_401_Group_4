@@ -69,12 +69,19 @@ def users_adminmenu(request):
         user = get_user(request)
         ban_username = request.POST.get('ban_name', '')
         unban_username = request.POST.get('unban_name', '')
+        error = "This username does not exists"
         if ban_username != '':
-            name = User.objects.get(userName=ban_username)
+            try:
+                name = User.objects.get(userName=ban_username)
+            except user.DoesNotExist:
+                return render(request, 'users/admin-menu.html', {'user': user, 'error1': error})
             name.blocked = True
             name.save()
         if unban_username != '':
-            name = User.objects.get(userName=unban_username)
+            try:
+                name = User.objects.get(userName=unban_username)
+            except user.DoesNotExist:
+                return render(request, 'users/admin-menu.html', {'user': user, 'error2': error})
             name.blocked = False
             name.save()
         return render(request, 'users/admin-menu.html', {'user': user})

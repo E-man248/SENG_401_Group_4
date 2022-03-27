@@ -4,6 +4,7 @@ from courses.models import *
 
 # Create your models here.
 
+
 class User(models.Model):
     name = models.CharField(max_length=32)
     email = models.CharField(max_length=100, unique=True)
@@ -21,10 +22,10 @@ class User(models.Model):
         return self.message_set.all()
 
     def getUnreadMesages(self):
-        ms = self.message_set.filter(readFlag = False)
+        ms = self.message_set.filter(readFlag=False)
         for m in ms:
             m.readFlag = True
-        return ms    
-        
+        return ms
+
     def __str__(self):
         return str(self.userName)
