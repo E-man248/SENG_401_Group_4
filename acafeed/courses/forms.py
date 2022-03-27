@@ -13,3 +13,12 @@ class AddCourseForm(forms.ModelForm):
         model = models.Course
         fields = ['name', 'courseCode', 'sectionNumber', 'faculty',
                   'professor', 'professorEmail', 'year']
+
+        
+class AddToMyCoursesForm(forms.ModelForm):
+    class Meta:
+        model = models.Course
+        exclude = ['courseCode', 'sectionNumber', 'faculty', 'professor', 'professorEmail', 'year']
+        widgets = {
+            'courses': TextInput()
+        }
