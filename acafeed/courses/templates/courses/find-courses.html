@@ -37,7 +37,10 @@
         {% for u in unchecked %}
         <center><p>{{ u }}</p></center>
         {% endfor %}
-        <br><center><button type="submit"> Add to My Courses </button></center></br>
+        <form action="{% url 'courses:findcourses' %}" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <center><input type="submit" value="Add to My Courses"></center>
     </div>
 
 
