@@ -15,7 +15,9 @@
 
     <h2>{{ course }}</h2>
 
-
+  <a href="{% url 'courses:mycourses' %}?left_course={{ course.id }}">
+    <button type="button">Leave Course</button>
+  </a>
 
 
     <main>

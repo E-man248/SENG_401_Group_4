@@ -71,6 +71,12 @@ def get_user(request):
 def courses_mycourses(request):
     if 'user_id' in request.session:
         user = get_user(request)
+
+        if request.GET.get('left_course'):
+            course_id = request.GET.get('left_course')
+            course = Course.objects.get(id=course_id)
+            user.courses.remove(course)
+
         return render(request, 'courses/my-courses.html', {'user': user})
     else:
         return redirect('users:login')
