@@ -23,12 +23,6 @@ class LoginForm(forms.ModelForm):
         }
 
 
-class AdminForm(forms.ModelForm):
-    class Meta:
-        model = models.User
-        fields = ['blocked']
-
-
 class EditProfileForm(forms.ModelForm):
     class Meta:
         model = models.User

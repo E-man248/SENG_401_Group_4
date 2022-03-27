@@ -19,14 +19,16 @@
           <br>
 
         <form action="" method="post">
+          {% csrf_token %}
           <p><label for="Ban">Ban User:</label>
-            <input type="text" name="name" id="name" placeholder="Username"/>
+            <input type="text" name="ban_name" id="name" placeholder="Username"/>
             <input type="submit" value="Ban"></p>
         </form>
-
+ 
         <form action="" method="post">
+          {% csrf_token %}
           <p><label for="Unban">Remove Ban:</label>
-            <input type="text" name="name" id="name" placeholder="Username"/>
+            <input type="text" name="unban_name" id="name" placeholder="Username"/>
             <input type="submit" value="Unban"></p>
         </form>
       </fieldset>

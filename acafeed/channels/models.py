@@ -1,4 +1,3 @@
-from tkinter import CASCADE
 from django.db import models
 from django.utils import timezone
 from courses.models import Course
@@ -54,7 +53,8 @@ class Post(models.Model):
     def notify(self):
         for subscriber in self.posted_in.subscribers.all():
             if subscriber.username != self.created_by.username:
-                m = Message(messageText='New post in channel: ' + self.posted_in.name, recipient=subscriber)
+                m = Message(messageText='New post in channel: ' +
+                            self.posted_in.name, recipient=subscriber)
                 m.save()
 
     def __str__(self):
@@ -64,8 +64,8 @@ class Post(models.Model):
 class Reply(models.Model):
     reply_content = models.TextField(max_length=255)
     reply_date = models.DateField(default=timezone.now)
-    created_by = models.ForeignKey(User,on_delete=models.CASCADE)
-    reply_to = models.ForeignKey(Post,on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    reply_to = models.ForeignKey(Post, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ['reply_date']

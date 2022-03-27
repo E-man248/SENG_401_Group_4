@@ -67,6 +67,16 @@ def users_userprofile(request):
 def users_adminmenu(request):
     if 'user_id' in request.session:
         user = get_user(request)
+        ban_username = request.POST.get('ban_name', '')
+        unban_username = request.POST.get('unban_name', '')
+        if ban_username != '':
+            name = User.objects.get(userName=ban_username)
+            name.blocked = True
+            name.save()
+        if unban_username != '':
+            name = User.objects.get(userName=unban_username)
+            name.blocked = False
+            name.save()
         return render(request, 'users/admin-menu.html', {'user': user})
 
 
