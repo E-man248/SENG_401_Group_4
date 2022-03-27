@@ -20,9 +20,6 @@
 
         </form>
     </div>
-
-
-
 </div>
 
 
@@ -33,27 +30,22 @@
 
     <div>
         <h4>
-
             <label for="courses">
-
                 <h3>
-            <center>
-                {% for r in result %}
-                <input type="checkbox" id="checked_courses">
-                        {{ r }}
-                </input>
-                    <br></br>
-            </center>
-                {% endfor %}
+                    <center>
 
+                        {% for c in checked %}
+                            <br><input type="checkbox" id="checked_courses" checked>{{ c }}</input></br>
+                        {% endfor %}
+                        {% for u in unchecked %}
+                            <br><input type="checkbox" id="unchecked_courses">{{ u }}</input></br>
+                        {% endfor %}
+                    </center>
                     <center><button type="submit"> Add to My Courses </button></center>
-
                 </h3>
-
             </label>
             <br>
         </h4>
-
     </div>
 
 
