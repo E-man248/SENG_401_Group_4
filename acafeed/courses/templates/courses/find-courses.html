@@ -10,45 +10,35 @@
 <!-- Top box with all drop downs  -->
 <div>
     <div>
-        <form id="form">
-            {{myFilter.form.faculty.label_tag}}
-            {{myFilter.form.faculty}}
-            {{myFilter.form.year.label_tag}}
-            {{myFilter.form.year}}
-            {{myFilter.form.search}}
-            <button type='submit'>Search</button>
-
-        </form>
+        <h3>
+            <form id="form">
+                {{myFilter.form.faculty.label_tag}}
+                {{myFilter.form.faculty}}
+                {{myFilter.form.year.label_tag}}
+                {{myFilter.form.year}}
+                {{myFilter.form.search}}
+                <button type='submit'>Search</button>
+            </form>
+        </h3>
     </div>
 </div>
 
-
-<main>
 
     <!-- Main Content -->
 
 
     <div>
-        <h4>
-            <label for="courses">
-                <h3>
-                    <center>
+        <center><h4><p>Enrolled Courses</p></h4></center>
+        {% for c in checked %}
+        <center><p>{{ c }}</p></center>
+        {% endfor %}
 
-                        {% for c in checked %}
-                            <br><input type="checkbox" id="checked_courses" checked>{{ c }}</input></br>
-                        {% endfor %}
-                        {% for u in unchecked %}
-                            <br><input type="checkbox" id="unchecked_courses">{{ u }}</input></br>
-                        {% endfor %}
-                    </center>
-                    <center><button type="submit"> Add to My Courses </button></center>
-                </h3>
-            </label>
-            <br>
-        </h4>
+        <center><h4><p>Not Enrolled Courses</p></h4></center>
+        {% for u in unchecked %}
+        <center><p>{{ u }}</p></center>
+        {% endfor %}
+        <br><center><button type="submit"> Add to My Courses </button></center></br>
     </div>
 
-
-</main>
 
 {% endblock %}
