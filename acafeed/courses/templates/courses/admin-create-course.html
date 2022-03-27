@@ -12,14 +12,10 @@
     <!-- Main Content -->
     <article>
       <fieldset>
-        <form action="" method="post">
-          <p><label for="name">Course Name:</label>
-            <input type="text" name="name" id="name" /></p>
-          <p><label for="major">Major:</label>
-            <input type="text" name="major" id="major" /></p>
-          <p><label for="year">Year:</label>
-            <input type="text" name="year" id="year" /></p>
-          <p><center><input type="submit" value="Create Course"></center></p>
+        <form action="{% url 'courses:admincreatecourse' %}" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <center><input type="submit" value="Create Course"></center>
         </form>
       </fieldset>
     </article>

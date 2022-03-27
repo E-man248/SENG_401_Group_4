@@ -12,11 +12,10 @@
     <!-- Main Content -->
     <article>
       <fieldset>
-        <form action="" method="post">
-          <p><label for="course">Course Name: Dropdown</label></p>
-          <p><label for="name">Channel Name:</label>
-            <input type="text" name="name" id="name" value="#"/></p>
-          <p><center><input type="submit" value="Create Channel"></center></p>
+        <form action="{% url 'channels:admincreatechannel' %}" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <center><input type="submit" value="Create Channel"></center>
         </form>
       </fieldset>
     </article>
