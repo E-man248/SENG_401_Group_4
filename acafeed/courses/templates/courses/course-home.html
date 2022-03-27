@@ -53,6 +53,15 @@
 
       </article>
 
+      <aside>
+
+        <h3>Users</h3>
+        {% for user in course.user_set.all %}
+          <li>{{ user.userName }}</li>
+        {% endfor %}
+
+      </aside>
+
     </main>
 
 {% endif %}
