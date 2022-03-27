@@ -30,10 +30,34 @@ def courses_coursehome(request):
 
 
 def courses_findcourses(request):
-    courses = Course.objects.all()
-    myFilter = FindCourseFilter(request.GET, queryset=courses)
-    result = myFilter.qs
-    return render(request, 'courses/find-courses.html', {'myFilter': myFilter, 'result': result})
+    #form = AddToMyCoursesForm()
+    if 'user_id' in request.session:
+        user = get_user(request)
+        courses = Course.objects.all()
+        myFilter = FindCourseFilter(request.GET, queryset=courses)
+        searchresult = myFilter.qs
+        checked = user.courses.all()
+        checkedresult = []
+        uncheckedresult = []
+        for r in searchresult:
+            for c in checked:
+                if r == c:
+                    checkedresult.append(r)
+
+        for r in searchresult:
+            if r not in checkedresult:
+                uncheckedresult.append(r)
+
+        checkedresultset = set(checkedresult)
+        uncheckedresultset = set(uncheckedresult)
+        return render(request, 'courses/find-courses.html', {'myFilter': myFilter, 'checked': checkedresultset,
+                                                             'unchecked': uncheckedresultset})
+    #if request.method == 'POST':
+     #   form = AddToMyCoursesForm(request.POST)
+      #  user = form.save(commit=False)
+       # user.save()
+       # return redirect('courses/find-courses.html')
+    #return render(request, 'courses/find-courses.html', {'form': form})
 
 
 def get_user(request):
