@@ -12,6 +12,11 @@
     <!-- Main Content -->
     <article>
       <fieldset>
+
+            {% if error %}
+            <center><p> {{error}} </p></center>
+            {% endif %}
+
         <form action="{% url 'courses:admindeletecourse' %}" method="post">
           {% csrf_token %}
           {{ form.as_p }}

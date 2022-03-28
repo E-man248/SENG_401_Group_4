@@ -113,10 +113,13 @@ def channels_admindeletechannel(request):
         user = get_user(request)
         form = DeleteChannelForm()
         if request.method == 'POST':
-            form = DeleteChannelForm(request.POST)
-            channel = Channel.objects.get(name=request.POST['name'])
-            channel.delete()
-            return redirect('channels:admindeletechannel')
+            if Channel.objects.filter(name=request.POST['name']).exists():
+                form = DeleteChannelForm(request.POST)
+                channel = Channel.objects.get(name=request.POST['name'])
+                channel.delete()
+                return redirect('channels:admindeletechannel')
+            error = "Could not find a channel with that name."
+            return render(request, 'channels/admin-delete-channel.html', {'form': form, 'error': error, 'user': user})
 
         return render(request, 'channels/admin-delete-channel.html', {'form': form, 'user': user})
     else:

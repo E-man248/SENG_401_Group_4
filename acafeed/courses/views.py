@@ -103,10 +103,13 @@ def courses_admindeletecourse(request):
         user = get_user(request)
         form = DeleteCourseForm()
         if request.method == 'POST':
-            form = DeleteCourseForm(request.POST)
-            course = Course.objects.get(name=request.POST['name'])
-            course.delete()
-            return redirect('courses:admindeletecourse')
+            if Course.objects.filter(name=request.POST['name']).exists():
+                form = DeleteCourseForm(request.POST)
+                course = Course.objects.get(name=request.POST['name'])
+                course.delete()
+                return redirect('courses:admindeletecourse')
+            error = "Could not find a course with that name."
+            return render(request, 'courses/admin-delete-course.html', {'form': form, 'error': error, 'user': user})
 
         return render(request, 'courses/admin-delete-course.html', {'form': form, 'user': user})
     else:
