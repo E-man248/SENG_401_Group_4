@@ -106,7 +106,7 @@ def courses_admindeletecourse(request):
             form = DeleteCourseForm(request.POST)
             course = Course.objects.get(name=request.POST['name'])
             course.delete()
-            return redirect('courses:admincreatecourse')
+            return redirect('courses:admindeletecourse')
 
         return render(request, 'courses/admin-delete-course.html', {'form': form, 'user': user})
     else:
