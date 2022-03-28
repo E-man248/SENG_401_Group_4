@@ -20,7 +20,7 @@ class Channel(models.Model):
 
     def unsubscribe(self, user):
         u = User.objects.get(userName=user)
-        self.topic_set.remove(u)
+        self.subscribers.remove(u)
 
     def __str__(self):
         return str(self.name)

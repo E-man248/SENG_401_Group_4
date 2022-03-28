@@ -29,7 +29,30 @@ def channels_admincreatechannel(request):
 def channels_channelhome(request):
     if 'user_id' in request.session:
         user = get_user(request)
-        return render(request, 'channels/channel-home.html', {'user': user})
+        channel_id = request.GET.get('channel_id')
+        myChannel = Channel.objects.get(id=channel_id)
+        if user in myChannel.subscribers.all():
+            if request.method == 'POST':
+                if user in myChannel.subscribers.all():
+                    myChannel.unsubscribe(user)
+                    myChannel.save()
+                    return render(request, 'channels/channel-home.html', {'user': user, 'sub': 'sub'})
+                else:
+                    myChannel.subscribe(user)
+                    myChannel.save()
+                    return render(request, 'channels/channel-home.html', {'user': user, 'unsub': 'unsub'})
+            return render(request, 'channels/channel-home.html', {'user': user, 'unsub': 'unsub'})
+        else:
+            if request.method == 'POST':
+                if user in myChannel.subscribers.all():
+                    myChannel.unsubscribe(user)
+                    myChannel.save()
+                    return render(request, 'channels/channel-home.html', {'user': user, 'sub': 'sub'})
+                else:
+                    myChannel.subscribe(user)
+                    myChannel.save()
+                    return render(request, 'channels/channel-home.html', {'user': user, 'unsub': 'unsub'})
+            return render(request, 'channels/channel-home.html', {'user': user, 'sub': 'sub'})
     else:
         return redirect('users:login')
 
@@ -40,7 +63,8 @@ def channels_createpost(request):
         channel_id = request.GET.get('channel_id')
 
         if request.method == 'GET':
-            request.session['last_page'] = request.META.get('HTTP_REFERER', '/')
+            request.session['last_page'] = request.META.get(
+                'HTTP_REFERER', '/')
 
         form = PostForm()
         if request.method == 'POST':

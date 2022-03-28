@@ -13,9 +13,19 @@
   <h2><a href="{% url 'courses:coursehome' %}?course_id={{course.id}}">{{ course }}</a></h2>
   <h2>#{{ channel }}</h2>
 
-  <a href="#">
-    <button type="button">Subscribe</button>
-  </a>
+  {% if sub %}
+  <form action="" method="post">
+    {% csrf_token %}
+      <input type="submit" name="subs" value="Subscribe">
+  </form>
+  {% endif %}
+  
+  {% if unsub %}
+  <form action="" method="post">
+    {% csrf_token %}
+      <input type="submit" name="unsubs" value="Unsubscribe">
+  </form>
+  {% endif %}
 
   <main>
     <!-- Main Content -->
