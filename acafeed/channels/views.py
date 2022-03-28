@@ -77,6 +77,7 @@ def channels_createpost(request):
             new_post.created_by = user
             new_post.posted_in = Channel.objects.get(id=channel_id)
             new_post.save()
+            new_post.notify()
             return HttpResponseRedirect(request.session['last_page'])
         return render(request, 'channels/create-post.html', {'form': form, 'user': user})
     else:

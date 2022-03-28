@@ -21,11 +21,16 @@ class User(models.Model):
     def getAllMessages(self):
         return self.message_set.all()
 
-    def getUnreadMesages(self):
-        ms = self.message_set.filter(readFlag=False)
+    def getUnreadMessages(self):
+        ms = self.message_set.filter(readFlag=0)
+        # self.setAllRead()
+        return ms
+
+    def setAllRead(self):
+        ms = self.message_set.filter(readFlag=0)
         for m in ms:
             m.readFlag = True
-        return ms
+            m.save()
 
     def __str__(self):
         return str(self.userName)

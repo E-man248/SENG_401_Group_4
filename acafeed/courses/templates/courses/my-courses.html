@@ -25,15 +25,40 @@
 
     <article>
       <h3>Messages</h3>
-      <form method = "GET">
-        {% for message in user.getAllMessages %}
-          <p><input type="checkbox" id="message">{{ message }}</input></p>
+      <style>
+        table th {
+          font-size: 20px;
+          min-width: 200px
+        }
+        table tr {
+          font-size: 16px;
+        }
+       </style>
+      <table>
+        <tr>
+          <th>Message</th>
+          <th>Time Sent</th>
+        </tr>
+        {% for message in user.getUnreadMessages %}
+        <tr>
+          <td>{{message.messageText}}</td>
+          <td>{{message.dateSent}}</td>
+        </tr>
         {% endfor %}
-        <center><input type="submit" value="Mark As Read"></center>
-      </form>
-      {% if not user.getAllMessages %}
+      </table>
+      {% if not user.getUnreadMessages %}
         <p>No new notifications.</p>
       {% endif %}
+      <br>
+      <form action="{% url 'courses:readmessage' %}" method="post">
+        {% csrf_token %}
+        <center><input type="submit" value="Mark All As Read">
+      </form>
+      <span style="padding-left:20px"></span> 
+      <a href="{% url 'courses:allmessages' %}">
+        <button type="button">See All Messages</button></center>
+      </a>
+
     </article>
 
 

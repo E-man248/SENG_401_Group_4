@@ -1,0 +1,38 @@
+{% extends 'base_layout.html' %}
+
+{% block content %}
+
+{% include 'navbar.html' %}
+
+  <!-- Title -->
+  <h2>All Messages for: {{ user.name }}</h2>
+
+  <main>
+    <article>
+    <!-- Main Content -->
+    <style>
+      table th {
+        font-size: 20px;
+        min-width: 200px
+      }
+      table tr {
+        font-size: 16px;
+      }
+     </style>
+    <table>
+      <tr>
+        <th>Message</th>
+        <th>Time Sent</th>
+      </tr>
+      {% for message in user.getAllMessages %}
+      <tr>
+        <td>{{message.messageText}}</td>
+        <td>{{message.dateSent}}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    </article>
+    
+  </main>
+
+{% endblock %}

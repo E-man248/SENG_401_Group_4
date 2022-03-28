@@ -82,7 +82,17 @@ def courses_mycourses(request):
 
 
 def read_message(request):
-    readMessages = request.POST.getlist('messages')
     if 'user_id' in request.session:
         user = get_user(request)
+        readMessages = user.getAllMessages()
+        if request.method == 'POST':
+            user.setAllRead()
+
         return render(request, 'courses/my-courses.html', {'user': user})
+
+def all_messages(request):
+    if 'user_id' in request.session:
+        user = get_user(request)
+        return render(request, 'courses/all-messages.html', {'user': user})
+    else:
+        return redirect('users:login')
