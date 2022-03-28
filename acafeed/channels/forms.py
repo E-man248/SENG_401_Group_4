@@ -20,3 +20,9 @@ class AddChannelForm(forms.ModelForm):
     class Meta:
         model = models.Channel
         fields = ['name', 'course']
+
+
+class DeleteChannelForm(forms.ModelForm):
+    class Meta:
+        model = models.Channel
+        fields = ['name']

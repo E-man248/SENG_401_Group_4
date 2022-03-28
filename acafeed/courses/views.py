@@ -96,3 +96,18 @@ def all_messages(request):
         return render(request, 'courses/all-messages.html', {'user': user})
     else:
         return redirect('users:login')
+
+
+def courses_admindeletecourse(request):
+    if 'user_id' in request.session:
+        user = get_user(request)
+        form = DeleteCourseForm()
+        if request.method == 'POST':
+            form = DeleteCourseForm(request.POST)
+            course = Course.objects.get(name=request.POST['name'])
+            course.delete()
+            return redirect('courses:admincreatecourse')
+
+        return render(request, 'courses/admin-delete-course.html', {'form': form, 'user': user})
+    else:
+        return redirect('users:login')

@@ -17,6 +17,10 @@
           <span style="padding-left:20px"></span>
           <a href="{% url 'channels:admincreatechannel' %}"><button>Create Channel</button></a></center>
           <br>
+        <center><a href="{% url 'courses:admindeletecourse' %}"><button>Delete Course</button></a>
+          <span style="padding-left:20px"></span>
+          <a href="{% url 'channels:admindeletechannel' %}"><button>Delete Channel</button></a></center>
+          <br>
 
         {% if error1 %}
         <div> {{error1}} </div>

@@ -106,3 +106,18 @@ def channels_posthome(request):
 def get_user(request):
     if 'user_id' in request.session:
         return User.objects.get(id=request.session['user_id'])
+
+
+def channels_admindeletechannel(request):
+    if 'user_id' in request.session:
+        user = get_user(request)
+        form = DeleteChannelForm()
+        if request.method == 'POST':
+            form = DeleteChannelForm(request.POST)
+            channel = Channel.objects.get(name=request.POST['name'])
+            channel.delete()
+            return redirect('channels:admindeletechannel')
+
+        return render(request, 'channels/admin-delete-channel.html', {'form': form, 'user': user})
+    else:
+        return redirect('users:login')

@@ -1,0 +1,25 @@
+{% extends 'base_layout.html' %}   
+
+{% block content %}
+
+  <!-- Header -->
+    {% include 'navbar.html' %}
+
+  <!-- Title -->
+  <h2>Delete Channel</h2>
+  <main>
+
+    <!-- Main Content -->
+    <article>
+      <fieldset>
+        <form action="{% url 'channels:admindeletechannel' %}" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <center><input type="submit" value="Delete Channel"></center>
+        </form>
+      </fieldset>
+    </article>
+
+  </main>
+
+{% endblock %}

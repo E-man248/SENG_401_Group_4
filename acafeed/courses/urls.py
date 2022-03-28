@@ -9,5 +9,6 @@ urlpatterns = [
     path('find-courses/', views.courses_findcourses, name="findcourses"),
     path('my-courses/', views.courses_mycourses, name="mycourses"),
     path('read-messages/', views.read_message, name ="readmessage"),
-    path('all-messages/', views.all_messages, name="allmessages")
+    path('all-messages/', views.all_messages, name="allmessages"),
+    path('admin-delete-course/', views.courses_admindeletecourse, name="admindeletecourse")
 ]

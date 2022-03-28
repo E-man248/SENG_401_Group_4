@@ -1,0 +1,25 @@
+{% extends 'base_layout.html' %}   
+
+{% block content %}
+
+  <!-- Header -->
+    {% include 'navbar.html' %}
+
+  <!-- Title -->
+  <h2>Delete Course</h2>
+  <main>
+
+    <!-- Main Content -->
+    <article>
+      <fieldset>
+        <form action="{% url 'courses:admindeletecourse' %}" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <center><input type="submit" value="Delete Course"></center>
+        </form>
+      </fieldset>
+    </article>
+
+  </main>
+
+{% endblock %}

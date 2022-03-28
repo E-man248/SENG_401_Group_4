@@ -24,3 +24,9 @@ class AddToMyCoursesForm(forms.ModelForm):
         widgets = {
             'courses': TextInput()
         }
+
+
+class DeleteCourseForm(forms.ModelForm):
+    class Meta:
+        model = models.Course
+        fields = ['name']
