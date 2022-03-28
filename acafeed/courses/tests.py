@@ -5,7 +5,7 @@ from courses.models import Course
 
 # Create your tests here.
 
-class CourseTestCase(TestCase):
+class TestCourseCreation(TestCase):
 
     def setUp(self):
 

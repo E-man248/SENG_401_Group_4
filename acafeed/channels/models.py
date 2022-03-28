@@ -53,8 +53,8 @@ class Post(models.Model):
     def notify(self):
         for subscriber in self.posted_in.subscribers.all():
             if subscriber.userName != self.created_by.userName:
-                m = Message(messageText='New post in channel: ' +
-                            self.posted_in.name, recipient=subscriber)
+                m = Message(messageText='New post in channel: ' + self.posted_in.name + 
+                    ' for course: ' + self.posted_in.course.name, recipient=subscriber)
                 m.save()
 
     def __str__(self):

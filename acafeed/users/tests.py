@@ -5,7 +5,7 @@ from users.models import User
 
 # Create your tests here.
 
-class UserTestCase(TestCase):
+class TestUserCreation(TestCase):
 
     def setUp(self):
         testCourse = Course(name="test course", )
