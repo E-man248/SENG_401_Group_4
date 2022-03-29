@@ -14,7 +14,7 @@ class User(models.Model):
     major = models.CharField(max_length=32)
     school = models.CharField(max_length=255)
     date_joined = models.DateTimeField(default=timezone.now)
-    courses = models.ManyToManyField(Course)
+    courses = models.ManyToManyField(Course, blank=True)
     blocked = models.BooleanField(default=False)
     isAdmin = models.BooleanField(default=False)
 

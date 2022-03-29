@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-zv2shhm!5gdn(ip!3d)tl7c4pgmzc)5ev))^-7#3-r@ooweg(1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'acafeed.uw.r.appspot.com'
+]
 
 
 # Application definition
@@ -77,12 +79,36 @@ WSGI_APPLICATION = 'acafeed.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+# [START db_setup]
+if os.getenv('GAE_APPLICATION', None):
+    # Running on production App Engine, so connect to Google Cloud SQL using
+    # the unix socket at /cloudsql/<your-cloudsql-connection string>
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/acafeed:us-central1:acafeed-mysql',
+            'USER': 'acafeed_user',
+            'PASSWORD': 'seng401group4',
+            'NAME': 'acafeed-mysql-database',
+        }
     }
-}
+else:
+    # Running locally so connect to either a local MySQL instance or connect 
+    # to Cloud SQL via the proxy.  To start the proxy via command line: 
+    #    $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306 
+    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+            'NAME': 'acafeed-mysql-database',
+            'USER': 'acafeed_user',
+            'PASSWORD': 'seng401group4',
+        }
+    }
+# [END db_setup]
 
 
 # Password validation
@@ -122,6 +148,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'assets'),
