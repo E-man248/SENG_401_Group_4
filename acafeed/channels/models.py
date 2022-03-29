@@ -12,7 +12,7 @@ from users.models import User
 class Channel(models.Model):
     name = models.CharField(max_length=255, unique=True)
     date_posted = models.DateTimeField(default=timezone.now)
-    subscribers = models.ManyToManyField(User)
+    subscribers = models.ManyToManyField(User, blank=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, default=1)
 
     def subscribe(self, user):
