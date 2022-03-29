@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +28,9 @@ SECRET_KEY = 'django-insecure-zv2shhm!5gdn(ip!3d)tl7c4pgmzc)5ev))^-7#3-r@ooweg(1
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'acafeed.uw.r.appspot.com'
+    'acafeed.uw.r.appspot.com',
+    'localhost',
+    '127.0.0.1'
 ]
 
 
@@ -82,8 +85,7 @@ WSGI_APPLICATION = 'acafeed.wsgi.application'
 
 # [START db_setup]
 if os.getenv('GAE_APPLICATION', None):
-    # Running on production App Engine, so connect to Google Cloud SQL using
-    # the unix socket at /cloudsql/<your-cloudsql-connection string>
+    # Running on production App Engine
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -93,11 +95,17 @@ if os.getenv('GAE_APPLICATION', None):
             'NAME': 'acafeed-mysql-database',
         }
     }
+elif 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+# [END db_setup]
 else:
     # Running locally so connect to either a local MySQL instance or connect 
-    # to Cloud SQL via the proxy.  To start the proxy via command line: 
-    #    $ cloud_sql_proxy -instances=[INSTANCE_CONNECTION_NAME]=tcp:3306 
-    # See https://cloud.google.com/sql/docs/mysql-connect-proxy
+    # to Cloud SQL via the proxy.
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
@@ -108,6 +116,7 @@ else:
             'PASSWORD': 'seng401group4',
         }
     }
+
 # [END db_setup]
 
 
